@@ -1,2 +1,2 @@
 # ERPMark-timesheet-server
-Server side codes
+Server side codes handled by codeigniter
