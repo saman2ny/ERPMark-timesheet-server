@@ -63,6 +63,21 @@
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
+ 
+  header('Access-Control-Allow-Origin: *');
+    header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+    // header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+    header("Content-Type: application/json");
+    $method = $_SERVER['REQUEST_METHOD'];
+    // if($method == "OPTIONS") {
+        // die();
+    // }
+	
+	if ( 'OPTIONS' == $_SERVER['REQUEST_METHOD'] ) {
+			status_header(200);
+			exit();
+		}
+
 switch (ENVIRONMENT)
 {
 	case 'development':

@@ -10,13 +10,13 @@ class Branch extends MX_Controller
         $this->load->model('Mydb');
         error_reporting(0);
         
-            $this->tablethree= 'follow';
-            $this->tableone= 'createleave';
-            $this->tabletwo= 'leave';
-            $this->tablefour= 'new';
-            $this->tablefive= 'meeting';
-        $this->table= 'createleave';
-        
+			$this->tablethree= 'follow';
+			$this->tableone= 'createleave';
+			$this->tabletwo= 'leave';
+			$this->tablefour= 'new';
+			$this->tablefive= 'meeting';
+			$this->table= 'createleave';
+
         
            
         
@@ -31,18 +31,21 @@ class Branch extends MX_Controller
     
     	public function index()
 	{
+
+				$jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$email = $jsonArray['opEmailId'];
+				$password = $jsonArray['opPassword'];
 			
-			
-        $data = array();
-        if($this->input->server('REQUEST_METHOD') == "POST")
-        {
-            $this->form_validation->set_rules('username', 'username', 'trim|required');
-            $this->form_validation->set_rules('password', 'password', 'trim|required');
-            if($this->form_validation->run() !== FALSE)
-            {
+        // $data = array();
+        // if($this->input->server('REQUEST_METHOD') == "POST")
+        // {
+            // $this->form_validation->set_rules('username', 'username', 'trim|required');
+            // $this->form_validation->set_rules('password', 'password', 'trim|required');
+            // if($this->form_validation->run() !== FALSE)
+            // {
                 
-                $username = $this->input->post('username'); 
-                $password = $this->input->post('password');
+                $username = json_encode($email); 
+                $password = json_encode($password);
                 
                 $data = array(
                     'emailaddress' => $username,
@@ -54,7 +57,6 @@ class Branch extends MX_Controller
                 
                 $data['employee']= $logins;
                 
-//                echo'<script type="text/javascript">alert("hi");</script>'; 
               
                 if($logins)
                 {
@@ -65,26 +67,31 @@ class Branch extends MX_Controller
 
                     );
                     $this->session->set_userdata($data);
-                    $status="ok";
-                    $content = base_url()."Branch/leavestatus/";
+                    $statusCode = 200;
+                    $message="ok";
+                    // $content = base_url()."Branch/leavestatus/";
+					 echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+					exit;
+					
                 }
                 else
                 {
-                    $status="error";
-                    $content="Username and Password is Wrong";  
+                    $statusCode=400;
+                    $message="Username and Password is Wrong"; 
+					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+					exit;					
                 }
-            }
-            else
-            {
+            // }
+            // else
+            // {
                 
-                $status =  "validation_error";
-                $content =  validation_errors();
-            }
-            echo json_encode(array( 'status' =>  $status, 'content' => $content));
-            exit;
-        }
-              $data['title']="Thinkwise Admin Dashboard";
-			$this->load->view('login/login',$data);
+                // $status =  "validation_error";
+                // $content =  validation_errors();
+            // }
+            // echo json_encode(array( 'status' =>  $status, 'content' => $content));
+            // exit;
+        // }
+           
     }
     
 
