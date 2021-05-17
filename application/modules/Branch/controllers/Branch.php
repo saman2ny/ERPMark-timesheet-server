@@ -224,7 +224,12 @@ class Branch extends MX_Controller
           
 
 
-                $this->load->view('leavestatus/leavestatus',$data);
+					$statusCode=200;
+					$message="List is Present"; 
+					echo json_encode(array( 'status' =>  $statusCode, 'message' => $listing, 'data' => $listing));
+					exit;
+					
+                // $this->load->view('leavestatus/leavestatus',$data);
             }
 
     
