@@ -92,7 +92,7 @@ class Branch extends MX_Controller
                     
 
                         
-//                        $logins['sessionValidMinutes'] = '15';
+                       $logins['sessionValidMinutes'] = '15';
 //                        $datas['firstname'] = $logins['firstname'];
 					print_r  (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message, 'menu'=> $menulist)));
                     
