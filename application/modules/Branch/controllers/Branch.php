@@ -70,12 +70,13 @@ class Branch extends MX_Controller
                     );
                     $this->session->set_userdata($data);
                     $statusCode = 200;
-                    $message="ok";
+                    $message="You have logged in successfully";
 					                // print_r($logins[0]['select']);
 
                     // $content = base_url()."Branch/leavestatus/";
-				
-					 print_r (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message, 'sessionTime'=>'3000')));
+				// $object = (object) $logins;
+$logins['sessionValidMinutes'] = '15';
+					 print_r (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message)));
 					exit;
 					
                 }
