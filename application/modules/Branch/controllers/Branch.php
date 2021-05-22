@@ -228,9 +228,9 @@ class Branch extends MX_Controller
     
     
            
-//********************************** Leave status ********************************************//     
-//********************************** Leave status ********************************************//     
-//********************************** Leave status ********************************************//  
+//********************************** Employee all list  ********************************************//     
+//********************************** Employee all list  ********************************************//     
+//********************************** Employee all list  ********************************************//  
     
       public function employeerList()
             {
@@ -238,39 +238,65 @@ class Branch extends MX_Controller
 				$username = $jsonArray['opEmailId'];
                 $moduleName = $jsonArray['moduleName'];
 
-          
-                $data['title']="Leave status";
-		  		$this->load->model("Mydb");
-				$this->Mydb->checkLoginbdm();
-              
-//                    $username =$this->session->userdata['user_email'];
                     $where=array('emailaddress'=>$username);
-                    $listing=$this->Mydb->get_record('employeeid,del_status', 'create_employee', $where);
-                    $data['bdmdetails']= $listing;
-                    $employeeid=implode($listing);
+					$listing=$this->Mydb->get_record('companyid', 'create_employee',$where);
+					$data['teamid']= $listing;
+					$companyid=implode($listing);
+                    $select="employee";
           
-          $where=array('del_status'=>"0");
-
-          if($moduleName === "leavestatus")
+                    $where=array('companyid'=>$companyid,  'select'=>$select);
+                    
+          if($moduleName === "employeer")
           {
-             
-                
-       $listing=$this->Mydb->get_all_records('id,employeeid,firstname,noofleave,fromdate,todate,leavetype,message,approvelstatus,date', 'leave', '');
-        $data['leavestatuslist']= $listing;
+                $listing=$this->Mydb->get_all_records('id,select,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,position,gender,birthday,address,area,pincode,homephone,mobilenumber,emailaddress,password,companynumber,companyemail,panno,aadharno,bankname,branchname,ifsc,accountnumber,permanentresident,visaexpirydate', 'create_employee', $where);
+
+                $data['employee']= $listing;
+                $statusCode=200;
+                $message="List is Present"; 
+                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
               
           }
           
-      
+                      
+         else if($moduleName === "leaveStatus")
+          {
+                $listing=$this->Mydb->get_all_records('id,employeeid,leavetype,fromdate,todate,noofleave,message,approvelstatus', 'leave', '');
+
+                $data['leaveList']= $listing;
+                $statusCode=200;
+                $message="List is Present"; 
+                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
+              
+          }
+          
+                                
+         else if($moduleName === "timeSheet")
+          {
+                    $listing=$this->Mydb->get_all_records('employeeid,empname,teamid,project,assignedhours,hours,description,date', 'timesheet', $where);
+                    $data['employee']= $listing;
+             
+             
+             
+                $data['timesheet']= $listing;
+                $statusCode=200;
+                $message="List is Present"; 
+                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
+              
+          }
           
           
-
-
-					$statusCode=200;
-					$message="List is Present"; 
-					echo json_encode(array( 'status' =>  $statusCode, 'message' => $listing, 'data' => $listing));
-					exit;
-					
-                // $this->load->view('leavestatus/leavestatus',$data);
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
             }
 
     
