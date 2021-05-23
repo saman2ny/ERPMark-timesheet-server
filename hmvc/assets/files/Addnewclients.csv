@@ -1,0 +1,9 @@
+branchname,bdmname,employeeid,customerid,callcreate,sourceofcall,jointcall,customername,customeraddress,customerphoneno,contactperson,contactnumber,contactdesignation,intime,outtime,personcontacted,persondescription,producttype,callstatus,productname,productvalue,prioritystatus,nextappointmentdate,nextappointmenttime
+chennai,kumar,EMP10004,CLT10010,Aaa,Cold Call,Aaa,Aaa,Aaa,9865321470,Aaa,9865321470,Aaa,00:00:00,00:00:00,Aaa,Aaa,Air Conditioner,Cold Call,,,P1,2019-07-28,09:02:00
+chennai,kumar,EMP10004,CLT10011,sQ,Cold Call,sQ,sQ,sQ,54645646464,sQ,9876543210,sQ,00:00:00,00:00:00,aaa,sQ,AIR,Cold Call,,,P1,2019-07-29,22:57:00
+chennai,kumar,EMP10004,CLT10012,dsfsdf,Reference Call,sdfsdf,sadasd,asdsad,234234,sdsd,sdsds,sdsds,21:54:00,08:56:00,sdsd,sdsd,AIR,Follow Up,,,P3,2014-04-26,20:55:00
+chennai,kumar,EMP10004,CLT10013,sadsd,Cold Call,sdfsf,sdf,sdf,3456435,dfgdg,dfgdfg,dfgdfg,19:55:00,07:54:00,dfgdfg,dfgdfg,AIR,Follow Up,,,P3,2014-07-26,07:54:00
+chennai,kumar,EMP10004,CLT10014,iopip,Cold Call,iopiop,iopiop,iopiop,786768678678,hjkhjkhkh,56774576456,fghfghfh,06:55:00,07:53:00,fghfghfgh,fghfghfgh,Air Conditioner,Sign Up,Air Conditioner,1.3,P1,,00:00:00
+chennai,kumar,EMP10004,CLT10015,QqB,Cold Call,QqB,QQQQQQQQB,QqB,323333333333,QqB,9876543211,QqB,00:00:00,00:00:00,aaaB,QqB,AIRB,Demo Call,Air Conditioner,1.3,P1,2013-07-27,19:53:00
+chennai,kumar,EMP10004,CLT10016,YQ,Cold Call,YQ,YQ,YQ,9876453120,YQ,98653232659,YQ,00:00:00,00:00:00,YYYQ,YQ,AIR,Demo Call,,,P1,,00:00:00
+chennai,kumar,EMP10004,CLT10017,,Cold Call,,asdasd,asdas,dasd,asdasd,asdas,dasd,00:00:00,00:00:00,asdasd,asdasd,asdasdasd,Support Call,,,P1,,00:00:00
