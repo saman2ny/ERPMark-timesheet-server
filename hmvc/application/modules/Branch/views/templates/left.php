@@ -28,10 +28,6 @@
                             
                             
                             
-                                    
-                            <li>
-                                <a href="<?php echo base_url();?>Branch/projectlist"><i class="material-icons">done_all</i><span>Project List</span> </a>
-                            </li> 
                             
                             
                                 
