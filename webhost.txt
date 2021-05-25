@@ -1,0 +1,9 @@
+username  - erpmarktesting
+password - %)wlX8DO(u7fEZA7rIBB
+
+Database name -  thinkwise
+Database username - ERPdevelopment
+Password - t6<-2A>HSY?&\$]x
+
+
+URL - https://in.000webhost.com/members/website/list
