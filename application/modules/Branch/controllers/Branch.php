@@ -33,7 +33,7 @@ class Branch extends MX_Controller
 	{
 
 				$jsonArray = json_decode(file_get_contents('php://input'),true); 
-				$email = $jsonArray['opEmailId'];
+				$username = $jsonArray['opEmailId'];
 				$password = $jsonArray['opPassword'];
 			
         // $data = array();
@@ -44,33 +44,38 @@ class Branch extends MX_Controller
             // if($this->form_validation->run() !== FALSE)
             // {
                 
-                $username = json_encode($email); 
-                $password = json_encode($password);
+                // $username = json_encode($email); 
+                // $password = json_encode($password);
+				
+				// echo $username;
+				// echo $email;
                 
-                $data = array(
+                $datas = array(
                     'emailaddress' => $username,
                     'password' => $password,
                     'select' => 'Branch',
                 );
                 
-                 $logins=$this->Mydb->get_all_records('firstname,emailaddress,password', 'create_employee', $data);
+                 $logins=$this->Mydb->get_all_records('firstname,select,emailaddress,password', 'create_employee', $datas);
                 
                 $data['employee']= $logins;
-                
               
                 if($logins)
                 {
                     $data = array(
-                        'user_email' => $data['emailaddress'],
-                        'user_name' => $data['password'],
+                        $username => $data['emailaddress'],
+                        $password => $data['password'],
                         'isset_login' => TRUE
 
                     );
                     $this->session->set_userdata($data);
                     $statusCode = 200;
                     $message="ok";
+					                // print_r($logins[0]['select']);
+
                     // $content = base_url()."Branch/leavestatus/";
-					 echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				
+					 print_r (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message, 'sessionTime'=>'3000')));
 					exit;
 					
                 }
@@ -204,11 +209,14 @@ class Branch extends MX_Controller
     
       public function leavestatus()
             {
+                $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['opEmailId'];
+          
                 $data['title']="Leave status";
 		  		$this->load->model("Mydb");
 				$this->Mydb->checkLoginbdm();
               
-                    $username =$this->session->userdata['user_email'];
+//                    $username =$this->session->userdata['user_email'];
                     $where=array('emailaddress'=>$username);
                     $listing=$this->Mydb->get_record('employeeid,del_status', 'create_employee', $where);
                     $data['bdmdetails']= $listing;
