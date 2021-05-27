@@ -16,6 +16,8 @@ class Branch extends MX_Controller
 			$this->tablefour= 'new';
 			$this->tablefive= 'meeting';
 			$this->table= 'createleave';
+        
+        $this->settings = new stdClass();
 
         
            
@@ -52,11 +54,16 @@ class Branch extends MX_Controller
                 
                 $datas = array(
                     'emailaddress' => $username,
-                    'password' => $password,
-                    'select' => 'Branch',
+                    'password' => $password
+//                    'select' => 'Branch',
                 );
                 
-                 $logins=$this->Mydb->get_all_records('firstname,select,emailaddress,password', 'create_employee', $datas);
+                 $logins=$this->Mydb->get_all_records('firstname,select,emailaddress,password,employeeid,companyid', 'create_employee', $datas);
+//                 $logins = $logins['select']
+            
+                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list', 'designation_menu', $logins['select']);
+            
+            
                 
                 $data['employee']= $logins;
               
@@ -68,15 +75,32 @@ class Branch extends MX_Controller
                         'isset_login' => TRUE
 
                     );
-                    $this->session->set_userdata($data);
+//                    $this->session->set_userdata($data);
                     $statusCode = 200;
                     $message="You have logged in successfully";
+                    
 					                // print_r($logins[0]['select']);
 
                     // $content = base_url()."Branch/leavestatus/";
-				// $object = (object) $logins;
-$logins['sessionValidMinutes'] = '15';
-					 print_r (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message)));
+				
+                    
+                    
+                    
+//                    $object = json_encode($logins);
+                   
+                 
+                    
+
+                        
+//                        $logins['sessionValidMinutes'] = '15';
+//                        $datas['firstname'] = $logins['firstname'];
+					print_r  (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message, 'menu'=> $menulist)));
+                    
+//                    print_r($object);
+                    
+//                    echo $object;
+                    
+                    
 					exit;
 					
                 }
