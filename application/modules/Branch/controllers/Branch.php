@@ -61,7 +61,7 @@ class Branch extends MX_Controller
                  $logins=$this->Mydb->get_all_records('firstname,select,emailaddress,password,employeeid,companyid', 'create_employee', $datas);
 //                 $logins = $logins['select']
             
-                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list', 'designation_menu', $logins['select']);
+                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $logins['select']);
             
             
                 
