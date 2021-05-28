@@ -232,10 +232,12 @@ class Branch extends MX_Controller
 //********************************** Leave status ********************************************//     
 //********************************** Leave status ********************************************//  
     
-      public function leavestatus()
+      public function employeerList()
             {
                 $jsonArray = json_decode(file_get_contents('php://input'),true); 
 				$username = $jsonArray['opEmailId'];
+                $moduleName = $jsonArray['moduleName'];
+
           
                 $data['title']="Leave status";
 		  		$this->load->model("Mydb");
@@ -249,10 +251,16 @@ class Branch extends MX_Controller
           
           $where=array('del_status'=>"0");
 
-          
-          
+          if($moduleName === "leavestatus")
+          {
+             
+                
        $listing=$this->Mydb->get_all_records('id,employeeid,firstname,noofleave,fromdate,todate,leavetype,message,approvelstatus,date', 'leave', '');
         $data['leavestatuslist']= $listing;
+              
+          }
+          
+      
           
           
 
