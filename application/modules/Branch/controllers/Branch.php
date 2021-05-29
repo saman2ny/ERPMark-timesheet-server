@@ -55,13 +55,11 @@ class Branch extends MX_Controller
                 $datas = array(
                     'emailaddress' => $username,
                     'password' => $password
-//                    'select' => 'Branch',
                 );
                 
-                 $logins=$this->Mydb->get_all_records('firstname,select,emailaddress,password,employeeid,companyid', 'create_employee', $datas);
-//                 $logins = $logins['select']
+                 $logins=$this->Mydb->get_all_records('firstname,role,emailaddress,password,employeeid,companyid', 'create_employee', $datas);
             
-                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $logins['select']);
+                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $logins['role']);
             
             
                 
@@ -79,10 +77,7 @@ class Branch extends MX_Controller
                     $statusCode = 200;
                     $message="You have logged in successfully";
                     
-					                // print_r($logins[0]['select']);
-
-                    // $content = base_url()."Branch/leavestatus/";
-				
+					             
                     
                     
                     
@@ -242,14 +237,14 @@ class Branch extends MX_Controller
 					$listing=$this->Mydb->get_record('companyid', 'create_employee',$where);
 					$data['teamid']= $listing;
 					$companyid=implode($listing);
-                    $select="employee";
+                    $role="employee";
           
-                    $where=array('companyid'=>$companyid,  'select'=>$select);
+                    $where=array('companyid'=>$companyid,  'role'=>$role);
                     $wheretime=array('companyid'=>$companyid);
                     
           if($moduleName === "employeer")
           {
-                $listing=$this->Mydb->get_all_records('id,select,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,position,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
+                $listing=$this->Mydb->get_all_records('id,role,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
 
                 $data['employee']= $listing;
                 $statusCode=200;
@@ -279,6 +274,22 @@ class Branch extends MX_Controller
              
              
                 $data['timesheet']= $listing;
+                $statusCode=200;
+                $message="List is Present"; 
+                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
+              
+          }
+          
+          
+                                        
+         else if($moduleName === "resigination")
+          {
+                    
+       $listing=$this->Mydb->get_all_records('id,employeeid,empname,department,reason,notice_date,resigination_date,date', 'resigination', '');
+        $data['resigination']= $listing;
+             
+             
+                $data['resigination']= $listing;
                 $statusCode=200;
                 $message="List is Present"; 
                 echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
@@ -1105,7 +1116,7 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                     $data['companyid']= $listing;
                     $companyid=implode($listing);
 
-                    $where=array('companyid'=>$companyid,'select'=>'Sales');
+                    $where=array('companyid'=>$companyid);
                     $listing=$this->Mydb->get_all_records('employeeid,selectbranch,firstname,employeenumber,gender,mobilenumber,emailaddress,teamname', 'create_employee', $where);
                     $data['employee']= $listing;
          
