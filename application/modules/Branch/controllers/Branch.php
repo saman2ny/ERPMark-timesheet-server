@@ -245,10 +245,11 @@ class Branch extends MX_Controller
                     $select="employee";
           
                     $where=array('companyid'=>$companyid,  'select'=>$select);
+                    $wheretime=array('companyid'=>$companyid);
                     
           if($moduleName === "employeer")
           {
-                $listing=$this->Mydb->get_all_records('id,select,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,position,gender,birthday,address,area,pincode,homephone,mobilenumber,emailaddress,password,companynumber,companyemail,panno,aadharno,bankname,branchname,ifsc,accountnumber,permanentresident,visaexpirydate', 'create_employee', $where);
+                $listing=$this->Mydb->get_all_records('id,select,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,position,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
 
                 $data['employee']= $listing;
                 $statusCode=200;
@@ -272,7 +273,7 @@ class Branch extends MX_Controller
                                 
          else if($moduleName === "timeSheet")
           {
-                    $listing=$this->Mydb->get_all_records('employeeid,empname,teamid,project,assignedhours,hours,description,date', 'timesheet', $where);
+                    $listing=$this->Mydb->get_all_records('employeeid,empname,teamid,project,assignedhours,hours,description,date', 'timesheet', $wheretime);
                     $data['employee']= $listing;
              
              
