@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2021 at 10:06 PM
+-- Generation Time: May 31, 2021 at 10:27 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -91,6 +91,26 @@ CREATE TABLE `branchleave` (
   `leavestatus` int(11) NOT NULL DEFAULT '0',
   `del_status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `branchlist`
+--
+
+CREATE TABLE `branchlist` (
+  `id` int(11) NOT NULL,
+  `branch` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `del_status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `branchlist`
+--
+
+INSERT INTO `branchlist` (`id`, `branch`, `date`, `del_status`) VALUES
+(1, 'chennai', '2021-06-01', 0);
 
 -- --------------------------------------------------------
 
@@ -226,14 +246,15 @@ INSERT INTO `createleave` (`id`, `branch`, `start_date`, `end_date`, `title`, `m
 CREATE TABLE `create_employee` (
   `id` int(11) NOT NULL,
   `companyid` varchar(255) NOT NULL,
+  `companyname` varchar(255) NOT NULL,
   `employeeid` varchar(255) NOT NULL,
-  `select` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
   `selectbranch` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `employeenumber` varchar(255) NOT NULL,
   `joiningdate` date NOT NULL,
-  `position` varchar(255) NOT NULL,
+  `designation` varchar(255) NOT NULL,
   `gender` varchar(255) NOT NULL,
   `birthday` date NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -248,6 +269,7 @@ CREATE TABLE `create_employee` (
   `visaexpirydate` varchar(255) NOT NULL,
   `teamname` varchar(255) NOT NULL,
   `teamid` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
   `del_status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -255,13 +277,33 @@ CREATE TABLE `create_employee` (
 -- Dumping data for table `create_employee`
 --
 
-INSERT INTO `create_employee` (`id`, `companyid`, `employeeid`, `select`, `selectbranch`, `firstname`, `lastname`, `employeenumber`, `joiningdate`, `position`, `gender`, `birthday`, `address`, `mobilenumber`, `emailaddress`, `password`, `panno`, `aadharno`, `bankname`, `ifsc`, `accountnumber`, `visaexpirydate`, `teamname`, `teamid`, `del_status`) VALUES
-(33, '001', 'EMP10018', 'employee', 'Erode', 'Ragu', 'R', '00000123', '2019-11-14', 'services', 'Male', '2019-11-13', '#124/6  anna nagar chennai', '987645313265', 'ragu@gmail.com', 'ragu', 'IUHKJB643538', '9685231475896', 'IOB', 'IOB0000212', '10100065423001', '2019-11-17', 'darkknight', '1', 0),
-(34, '001', 'EMP10019', 'employee', 'Chennai', 'Deepan', 'A', '60003190010', '2020-01-02', 'Area Head', 'Male', '1977-08-23', 'No.7 Sakthi vinayagar koil street', '9445149490', 'deepan.a@thinkwise.pro', 'deepan2020', 'ARYPD0015D', '509463008888', 'BOI', 'BKID0008013', '801310110012763', '', 'darkknight', '', 0),
-(37, '001', 'EMP10021', 'employee', 'Chennai', 'Yogendiran', '', '1001001', '2019-02-20', 'BDM', 'Male', '1997-02-07', 'ECRaaaaaaaaaaaaaa', '7010743603', 'yogendiran.s@thinkwise.pro', 'yogi1@3', 'WEFD25SDF1', '21654946698464', 'IOB', 'FGDF245DFD', '884531356456', '', 'darkknighta', '5', 0),
-(38, '002', 'EMP10022', 'employee', 'Chennai', 'Rishikesh', 'H', '1001002', '2018-02-22', 'BDM', 'Male', '1997-07-02', 'Porur', '7904081156', 'rishikesh@thinkwise.pro', 'rishi1@3', 'lknjkjljoljpo', 'jjpjpjpojp', 'IOB', 'jpoijp', 'pojpjpo', '', 'darkknight', '', 0),
-(39, '002', 'EMP10023', 'employee', 'Chennai', 'Saravanan', 'S', '1001003', '2019-06-03', 'BDM', 'Male', '1996-09-02', 'Triplicane', '9677857427', 'saravanan@thinkwise.pro', 'sara1@3', 'klnjklj', 'pjoj0', 'mjlmp', 'l;m', 'ipop', '', 'darkknight', '', 0),
-(40, '001', 'EMP10024', 'employee', 'Chennai', 'a', 'aa', '65', '2021-05-02', '121', 'Male', '2021-05-02', 'chennai', '9876543210', 'logu@gmail.com', '9876543210', '', '', '', '', '', '', 'darkknight', '', 0);
+INSERT INTO `create_employee` (`id`, `companyid`, `companyname`, `employeeid`, `role`, `selectbranch`, `firstname`, `lastname`, `employeenumber`, `joiningdate`, `designation`, `gender`, `birthday`, `address`, `mobilenumber`, `emailaddress`, `password`, `panno`, `aadharno`, `bankname`, `ifsc`, `accountnumber`, `visaexpirydate`, `teamname`, `teamid`, `country`, `del_status`) VALUES
+(33, '001', 'DK', 'EMP10018', 'employee', 'Erode', 'Ragu', 'R', '00000123', '2019-11-14', 'services', 'Male', '2019-11-13', '#124/6  anna nagar chennai', '987645313265', 'ragu@gmail.com', 'ragu', 'IUHKJB643538', '9685231475896', 'IOB', 'IOB0000212', '10100065423001', '2019-11-17', 'darkknight', '1', '', 0),
+(34, '001', 'ERPMark', 'EMP10019', 'employee', 'Chennai', 'Deepan', 'A', '60003190010', '2020-01-02', 'Area Head', 'Male', '1977-08-23', 'No.7 Sakthi vinayagar koil street', '9445149490', 'deepan.a@thinkwise.pro', 'deepan2020', 'ARYPD0015D', '509463008888', 'BOI', 'BKID0008013', '801310110012763', '', 'darkknight', '', '', 0),
+(37, '001', '', 'EMP10021', 'employee', 'Chennai', 'Yogendiran', '', '1001001', '2019-02-20', 'BDM', 'Male', '1997-02-07', 'ECRaaaaaaaaaaaaaa', '7010743603', 'yogendiran.s@thinkwise.pro', 'yogi1@3', 'WEFD25SDF1', '21654946698464', 'IOB', 'FGDF245DFD', '884531356456', '', 'darkknighta', '5', '', 0),
+(38, '002', '', 'EMP10022', 'employee', 'Chennai', 'Rishikesh', 'H', '1001002', '2018-02-22', 'BDM', 'Male', '1997-07-02', 'Porur', '7904081156', 'rishikesh@thinkwise.pro', 'rishi1@3', 'lknjkjljoljpo', 'jjpjpjpojp', 'IOB', 'jpoijp', 'pojpjpo', '', 'darkknight', '', '', 0),
+(39, '002', '', 'EMP10023', 'employee', 'Chennai', 'Saravanan', 'S', '1001003', '2019-06-03', 'BDM', 'Male', '1996-09-02', 'Triplicane', '9677857427', 'saravanan@thinkwise.pro', 'sara1@3', 'klnjklj', 'pjoj0', 'mjlmp', 'l;m', 'ipop', '', 'darkknight', '', '', 0),
+(40, '001', 'ERPMark', 'EMP10024', 'HR', 'Chennai', 'tom', 'a', '65', '2021-05-02', 'HR', 'Male', '2021-05-02', 'chennai', '9876543210', 'logu@gmail.com', 'qwerty', '', '', '', '', '', '', 'darkknight', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `designation`
+--
+
+CREATE TABLE `designation` (
+  `id` int(11) NOT NULL,
+  `designation` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `del_status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `designation`
+--
+
+INSERT INTO `designation` (`id`, `designation`, `date`, `del_status`) VALUES
+(1, 'web developer', '2021-06-01', 0);
 
 -- --------------------------------------------------------
 
@@ -293,7 +335,11 @@ INSERT INTO `designation_menu` (`id`, `label_name`, `route_path`, `designation`,
 (7, 'Resigination', '/home/resigination/resigination-list', 'Branch', 'la la-users', '0', 0),
 (8, 'Project_allocation', '/home/allocate-task/list-task', 'Branch', 'la la-users', '0', 0),
 (9, 'Settings', '/home/settings/', 'Branch', 'la la-users', '0', 0),
-(10, 'Reports', '/home/reports/', 'Branch', 'la la-users', '0', 0);
+(10, 'Reports', '/home/reports/', 'Branch', 'la la-users', '0', 0),
+(11, 'Employee', '/home/employee/list-employee', 'HR', 'la la-users', '0', 0),
+(12, 'Leave', '/home/allocate-leave/list-leave', 'HR', 'la la-users', '0', 0),
+(13, 'Attendance', '/home/attendance/list-attendance', 'HR', 'la la-users', '0', 0),
+(14, 'Reports', '/home/reports/', 'HR', 'la la-users', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -1027,7 +1073,24 @@ CREATE TABLE `leave` (
 INSERT INTO `leave` (`id`, `employeeid`, `firstname`, `noofleave`, `fromdate`, `todate`, `leavetype`, `message`, `date`, `approvelstatus`, `leavestatus`, `del_status`) VALUES
 (1, 'EMP10022', 'Rishikesh', '1000', '2020-02-05', '2020-02-06', 'Sick leave', 'To attend a marriage in Kerala for one day date is mentioned above', '2020-02-05', 'pending', 0, 0),
 (2, 'EMP10021', '', '200', '0000-00-00', '0000-00-00', 'Sick leave', 'zzzz', '2021-04-24', 'pending', 0, 0),
-(3, 'EMP10021', '', '200', '0000-00-00', '0000-00-00', 'Sick leave', 'zzzz', '2021-05-02', 'pending', 0, 0);
+(3, 'EMP10021', '', '200', '0000-00-00', '0000-00-00', 'Sick leave', 'zzzz', '2021-05-02', 'pending', 0, 0),
+(4, 'EMP10021', 'logi', '255', '2021-05-05', '2021-05-12', 'leave ketta kudukkanum', 'leave so varamanta ', '2021-05-12', 'yes', 0, 0),
+(5, 'EMP10021', 'logi', '255', '2021-05-05', '2021-05-12', 'leave ketta kudukkanum', 'leave so varamanta ', '2021-05-12', 'yes', 0, 0),
+(6, 'EMP10021', 'logi', '255', '2021-05-05', '2021-05-12', 'leave ketta kudukkanum', 'leave so varamanta ', '2021-05-12', 'yes', 0, 0),
+(7, 'EMP10021', 'logi', '255', '2021-05-05', '2021-05-12', 'leave ketta kudukkanum', 'leave so varamanta ', '2021-05-12', 'yes', 0, 0),
+(8, 'EMP10021', 'logi', '255', '2021-05-05', '2021-05-12', 'leave ketta kudukkanum', 'leave so varamanta ', '2021-05-12', 'yes', 0, 0),
+(9, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(10, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(11, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(12, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(13, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(14, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(15, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(16, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(17, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(18, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(19, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0),
+(20, 'EMP10021', 'logesh', '365', '2021-05-13', '2021-05-20', 'summa', 'leave na leave tha', '2021-05-05', 'yes', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1470,6 +1533,8 @@ CREATE TABLE `project` (
   `projectname` varchar(600) NOT NULL,
   `deadline` date NOT NULL,
   `companyid` varchar(255) NOT NULL,
+  `projecttype` varchar(255) NOT NULL,
+  `message` varchar(1000) NOT NULL,
   `teamname` varchar(250) NOT NULL,
   `tlname` varchar(255) NOT NULL,
   `date` date NOT NULL,
@@ -1480,8 +1545,27 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id`, `projectname`, `deadline`, `companyid`, `teamname`, `tlname`, `date`, `del_status`) VALUES
-(1, 'idk', '2021-05-12', '001', 'darkknight', 'deepan', '2021-05-11', 0);
+INSERT INTO `project` (`id`, `projectname`, `deadline`, `companyid`, `projecttype`, `message`, `teamname`, `tlname`, `date`, `del_status`) VALUES
+(1, 'idk', '2021-05-12', '001', 'web development', 'enna project ah irunthalum pannanum', 'darkknight', 'deepan', '2021-05-11', 0),
+(2, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(3, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(4, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(5, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(6, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(7, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(8, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(9, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(10, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(11, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(12, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(13, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(14, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(15, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(16, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(17, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(18, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(19, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0),
+(20, 'therila', '2021-05-04', '001', 'web developer', 'kaasu kudutha panniralam', 'darkowl', 'logi', '2021-05-11', 0);
 
 -- --------------------------------------------------------
 
@@ -1494,6 +1578,7 @@ CREATE TABLE `resigination` (
   `employeeid` varchar(255) NOT NULL,
   `empname` varchar(255) NOT NULL,
   `department` varchar(255) NOT NULL,
+  `designation` varchar(255) NOT NULL,
   `reason` varchar(600) NOT NULL,
   `notice_date` date NOT NULL,
   `resigination_date` date NOT NULL,
@@ -1505,10 +1590,30 @@ CREATE TABLE `resigination` (
 -- Dumping data for table `resigination`
 --
 
-INSERT INTO `resigination` (`id`, `employeeid`, `empname`, `department`, `reason`, `notice_date`, `resigination_date`, `date`, `del_status`) VALUES
-(1, 'EMP10021', 'a', 'a', 'a', '2021-05-21', '2021-05-12', '2021-05-03', 0),
-(2, 'EMP10021', '', '', '', '0000-00-00', '0000-00-00', '2021-05-02', 0),
-(3, 'EMP01111', 'sam', 'webdev', 'just try avalo tha', '2021-05-08', '2021-05-08', '2021-05-02', 0);
+INSERT INTO `resigination` (`id`, `employeeid`, `empname`, `department`, `designation`, `reason`, `notice_date`, `resigination_date`, `date`, `del_status`) VALUES
+(1, 'EMP10021', 'a', 'a', 'web developer', 'a', '2021-05-21', '2021-05-12', '2021-05-03', 0),
+(2, 'EMP10021', '', '', 'web developer', '', '0000-00-00', '0000-00-00', '2021-05-02', 0),
+(3, 'EMP01111', 'sam', 'webdev', 'web developer', 'just try avalo tha', '2021-05-08', '2021-05-08', '2021-05-02', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `del_status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id`, `role`, `date`, `del_status`) VALUES
+(1, 'employee', '2021-06-01', 0);
 
 -- --------------------------------------------------------
 
@@ -1605,6 +1710,27 @@ CREATE TABLE `tbl_customer` (
   `DOB` varchar(255) NOT NULL,
   `Contact_NO` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teamlist`
+--
+
+CREATE TABLE `teamlist` (
+  `id` int(11) NOT NULL,
+  `teamid` varchar(255) NOT NULL,
+  `teamname` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `del_status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teamlist`
+--
+
+INSERT INTO `teamlist` (`id`, `teamid`, `teamname`, `date`, `del_status`) VALUES
+(1, 'T001', 'Darkshadow', '2021-06-01', 0);
 
 -- --------------------------------------------------------
 
@@ -1718,6 +1844,12 @@ ALTER TABLE `branchleave`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `branchlist`
+--
+ALTER TABLE `branchlist`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `calendar`
 --
 ALTER TABLE `calendar`
@@ -1745,6 +1877,12 @@ ALTER TABLE `createleave`
 -- Indexes for table `create_employee`
 --
 ALTER TABLE `create_employee`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `designation`
+--
+ALTER TABLE `designation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1796,6 +1934,12 @@ ALTER TABLE `resigination`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -1811,6 +1955,12 @@ ALTER TABLE `target`
 -- Indexes for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teamlist`
+--
+ALTER TABLE `teamlist`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1854,6 +2004,12 @@ ALTER TABLE `branchleave`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `branchlist`
+--
+ALTER TABLE `branchlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
@@ -1884,10 +2040,16 @@ ALTER TABLE `create_employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT for table `designation`
+--
+ALTER TABLE `designation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `designation_menu`
 --
 ALTER TABLE `designation_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `follow`
@@ -1899,7 +2061,7 @@ ALTER TABLE `follow`
 -- AUTO_INCREMENT for table `leave`
 --
 ALTER TABLE `leave`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `meeting`
@@ -1923,13 +2085,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `resigination`
 --
 ALTER TABLE `resigination`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -1948,6 +2116,12 @@ ALTER TABLE `target`
 --
 ALTER TABLE `tbl_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `teamlist`
+--
+ALTER TABLE `teamlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `thinkwise_bdm_login`

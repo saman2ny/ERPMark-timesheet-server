@@ -343,10 +343,10 @@ class Mydb extends CI_Model {
 
     function getMTid()
 	{
-        $this->db->select_max('productid','productid');
-        $maxQuery=$this->db->get('products');
+        $this->db->select_max('teamid','teamid');
+        $maxQuery=$this->db->get('teamlist');
         $maxMTId=$maxQuery->result();
-        $maxMTId=$maxMTId[0]->productid;
+        $maxMTId=$maxMTId[0]->teamid;
         $maxMTIdNo=preg_replace("/[^0-9\.]/",'',$maxMTId);
         $maxMTIdNo=$maxMTIdNo+1;
         $split=str_split($maxMTId,3);
@@ -2722,18 +2722,18 @@ $results['total'] = $k->total;
 	
 	
 	
-	public function deletebdm($employeeids)
+	public function deleteproject($ids)
 	{
-$sql_query=$this->db->where('employeeid', $employeeids)->delete('create_employee');
+$sql_query=$this->db->where('id', $ids)->delete('project');
            if($sql_query)
 		   {
 			$this->session->set_flashdata('success', 'Record deleted successfully');
-			redirect('Branch/bdmlist');
+			redirect('Branch/project');
 		   }
 	else
 		{
 			$this->session->set_flashdata('error', 'Somthing went worng. Error!!');
-			redirect('Branch/bdmlist');
+			redirect('Branch/project');
 		}
 }
 	

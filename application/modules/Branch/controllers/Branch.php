@@ -51,15 +51,26 @@ class Branch extends MX_Controller
 				
 				// echo $username;
 				// echo $email;
+            
+            
+            $logi = 'HR';
                 
                 $datas = array(
                     'emailaddress' => $username,
                     'password' => $password
                 );
                 
-                 $logins=$this->Mydb->get_all_records('firstname,role,emailaddress,password,employeeid,companyid', 'create_employee', $datas);
+                 $logins=$this->Mydb->get_all_records('firstname,role,emailaddress,password,employeeid,companyid,companyname', 'create_employee', $datas);
+
             
-                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $logins['role']);
+            
+                    $listing=$this->Mydb->get_record('role', 'create_employee', $datas);
+                    $data['role']= $listing;
+                    $roleno=implode($listing);
+                    $designation=array('designation'=>$roleno);
+            
+                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $designation);
+//                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $logins[0]['designation']);
             
             
                 
@@ -415,21 +426,209 @@ $content=array('employeeid'=>$employeeid,'fromdate'=>$fromdate,'todate'=>$todate
           
           
           		    $where=array('emailaddress'=>$username);
-					$listing=$this->Mydb->get_record('teamid', 'create_employee',$where);
-					$data['teamid']= $listing;
-					$teamids=implode($listing);
+					$listing=$this->Mydb->get_record('companyid', 'create_employee',$where);
+					$data['companyid']= $listing;
+					$companyid=implode($listing);
           
-          $where=array('teamid'=>$teamids);
+                    $where=array('companyid'=>$companyid);
           
-       $listing=$this->Mydb->get_all_records('empname,project,assignedhours ,hours,description,date', 'timesheet', $where);
-        $data['timesheetlist']= $listing;
+       $listing=$this->Mydb->get_all_records('projectname,companyid,deadline,teamname,tlname,date,projecttype,message', 'project', $where);
+        $data['projectlist']= $listing;
           
           
 
 
                 $this->load->view('projectlist/projectlist',$data);
             }
+    
+    
+    
+        //********************************** Delete  project********************************************//
 
+    
+    	public function deleteproject($id)
+            {
+                $ids=base64_decode($id);
+                $this->Mydb->deleteproject($ids);
+            }
+    
+    
+    
+    
+    
+    
+    
+    
+        //********************************** Insert  project********************************************//
+        //********************************** Insert  project********************************************//
+    
+    
+    
+        
+
+    public function insertproject()
+    {
+		
+			$this->load->model("Mydb");
+			$this->Mydb->checkLoginbdm();
+           date_default_timezone_set('asia/kolkata');
+            $date = date("Y-m-d");
+           
+         
+          
+        
+        
+        $data = array();
+             if($this->input->server('REQUEST_METHOD') == "POST")
+        {
+                 
+                 
+                 
+                $this->form_validation->set_rules('employeeid', 'employeeid', 'trim|required');
+     
+  
+    
+ if($this->form_validation->run() !== FALSE)
+            {
+                $projectname=$this->input->post('projectname');
+                $companyid=$this->input->post('companyid');
+                $deadline=$this->input->post('deadline');
+                $teamname=$this->input->post('teamname');
+                $projecttype=$this->input->post('projecttype');
+                $message=$this->input->post('message');
+                $tlname=$this->input->post('tlname');
+               
+                          $data = array( 
+                            'projectname' => $projectname,
+                            'companyid' => $companyid,
+                            'deadline' => $deadline,
+                            'teamname' => $teamname,
+                            'projecttype' => $projecttype,
+                            'message' => $message,
+                            'tlname' => $tlname,
+                            'date' => $date,
+                          );
+                
+        $insert = $this->Mydb->insert('project', $data);  
+                if($insert)
+                {
+           
+                    $status="ok";
+                     $this->session->set_flashdata('msg', 'Form submitted successfully');
+                    $content = base_url()."Branch/project/";
+                }
+         
+            }
+            else
+            {
+                $status =  "validation_error";
+                $content =  validation_errors();
+            }
+            echo json_encode(array( 'status' =>  $status, 'content' => $content));
+            exit;
+        }
+        
+        
+        
+              $data['title']="Leave Status";
+			$this->load->view('project/project',$data);
+    }
+    
+    
+    
+    
+    //********************************** Upadate time sheet ********************************************//  
+    //********************************** Upadate time sheet ********************************************//  
+
+            
+    
+         
+                public function updateproject($id='')
+                {	
+					
+						$this->load->model("Mydb");
+                            $this->Mydb->checkLoginbdm();
+					
+					
+                        $data=array();
+                        $data['title']="Update Time Sheet";
+                        $sid=base64_decode($id);
+                    
+                    
+                    
+                        $this->load->helper(array('form'));
+                        $this->load->library('form_validation');
+                    
+                    
+                
+                    
+                        if($this->input->server('REQUEST_METHOD') == "POST")
+                        {					
+                            $this->form_validation->set_rules('companyid', 'companyid', 'trim|required');
+
+                            if($this->form_validation->run() !== FALSE)
+                            {
+                                
+                                
+                                
+                $id=$this->input->post('id');
+                $projectname=$this->input->post('projectname');
+                $companyid=$this->input->post('companyid');
+                $deadline=$this->input->post('deadline');
+                $teamname=$this->input->post('teamname');
+                $projecttype=$this->input->post('projecttype');
+                $message=$this->input->post('message');
+                $tlname=$this->input->post('tlname');
+
+                                
+                                
+                                
+     
+                                
+                            $where=array('id'=>$id);
+$content=array('projectname'=>$projectname,'companyid'=>$companyid,'deadline'=>$deadline,'teamname'=>$teamname,'projecttype'=>$projecttype,'message'=>$message,'tlname'=>$tlname);
+                                
+                            $settingupdate=$this->Mydb->update('project',$where,$content);	
+                                
+                                redirect('Branch/project');
+                            }
+                        }
+                      
+                 
+                    
+                    
+                      
+          $where=array('id'=>$sid);
+
+          
+          
+        $listing=$this->Mydb->get_record('projectname,companyid,deadline,teamname,tlname,date,projecttype,message', 'project', $where);
+        $data['updatetimesheet']= $listing;
+          
+                    
+                    
+          
+                        $this->load->view('timesheet/updatetimesheet', $data);
+                }
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 
@@ -888,6 +1087,9 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
 			$this->load->model("Mydb");
 			$this->Mydb->checkLoginBranch();
 		
+        //id Auto Increment
+        $data['maxCEId']=$this->Mydb->getCEid();  //emp
+        $data['maxMTId']=$this->Mydb->getMTid();   // team
 		
         $data = array();
              if($this->input->server('REQUEST_METHOD') == "POST")
