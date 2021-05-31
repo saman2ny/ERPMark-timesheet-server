@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2021 at 10:54 PM
+-- Generation Time: May 31, 2021 at 11:50 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -100,6 +100,7 @@ CREATE TABLE `branchleave` (
 
 CREATE TABLE `branchlist` (
   `id` int(11) NOT NULL,
+  `companyid` varchar(255) NOT NULL,
   `branch` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `del_status` int(11) NOT NULL DEFAULT '0'
@@ -109,8 +110,8 @@ CREATE TABLE `branchlist` (
 -- Dumping data for table `branchlist`
 --
 
-INSERT INTO `branchlist` (`id`, `branch`, `date`, `del_status`) VALUES
-(1, 'chennai', '2021-06-01', 0);
+INSERT INTO `branchlist` (`id`, `companyid`, `branch`, `date`, `del_status`) VALUES
+(1, '255', 'chennai', '2021-06-01', 0);
 
 -- --------------------------------------------------------
 
@@ -289,11 +290,33 @@ INSERT INTO `create_employee` (`id`, `companyid`, `companyname`, `employeeid`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `id` int(11) NOT NULL,
+  `companyid` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `del_status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`id`, `companyid`, `department`, `date`, `del_status`) VALUES
+(1, '001', 'web development', '2021-06-08', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `designation`
 --
 
 CREATE TABLE `designation` (
   `id` int(11) NOT NULL,
+  `companyid` varchar(255) NOT NULL,
   `designation` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `del_status` int(11) NOT NULL DEFAULT '0'
@@ -303,8 +326,8 @@ CREATE TABLE `designation` (
 -- Dumping data for table `designation`
 --
 
-INSERT INTO `designation` (`id`, `designation`, `date`, `del_status`) VALUES
-(1, 'web developer', '2021-06-01', 0);
+INSERT INTO `designation` (`id`, `companyid`, `designation`, `date`, `del_status`) VALUES
+(1, '001', 'web developer', '2021-06-01', 0);
 
 -- --------------------------------------------------------
 
@@ -1604,6 +1627,7 @@ INSERT INTO `resigination` (`id`, `employeeid`, `empname`, `department`, `design
 
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
+  `companyid` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `del_status` int(11) NOT NULL DEFAULT '0'
@@ -1613,8 +1637,8 @@ CREATE TABLE `role` (
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`id`, `role`, `date`, `del_status`) VALUES
-(1, 'employee', '2021-06-01', 0);
+INSERT INTO `role` (`id`, `companyid`, `role`, `date`, `del_status`) VALUES
+(1, '001', 'employee', '2021-06-01', 0);
 
 -- --------------------------------------------------------
 
@@ -1881,6 +1905,12 @@ ALTER TABLE `create_employee`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `designation`
 --
 ALTER TABLE `designation`
@@ -2039,6 +2069,12 @@ ALTER TABLE `createleave`
 --
 ALTER TABLE `create_employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `designation`
