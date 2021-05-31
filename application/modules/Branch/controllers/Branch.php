@@ -365,10 +365,10 @@ class Branch extends MX_Controller
           
                     $where=array('companyid'=>$companyid);
           
-                            $department=$this->Mydb->get_all_records('id,companyid,department,date,del_status', 'department', $where);
-                            $role=$this->Mydb->get_all_records('id,companyid,role,date,del_status', 'role', $where);
-                            $designation=$this->Mydb->get_all_records('id,companyid,designation,date,del_status', 'designation', $where);
-                            $branch=$this->Mydb->get_all_records('id,companyid,branch,date,del_status', 'branchlist', $where);
+                            $department=$this->Mydb->get_all_records('id,companyid,departmentId,department,date,del_status', 'department', $where);
+                            $role=$this->Mydb->get_all_records('id,companyid,roleId,role,date,del_status', 'role', $where);
+                            $designation=$this->Mydb->get_all_records('id,companyid,designationId,designation,date,del_status', 'designation', $where);
+                            $branch=$this->Mydb->get_all_records('id,companyid,branchId,branch,date,del_status', 'branchlist', $where);
 
           
                             $statusCode=200;
