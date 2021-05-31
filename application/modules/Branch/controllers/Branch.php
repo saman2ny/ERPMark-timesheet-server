@@ -309,15 +309,22 @@ class Branch extends MX_Controller
           
           
           
+                                                  
+         else if($moduleName === "resigination")
+          {
+                    
+       $listing=$this->Mydb->get_all_records('id,employeeid,empname,department,reason,notice_date,resigination_date,date', 'resigination', '');
+        $data['resigination']= $listing;
+             
+             
+                $data['resigination']= $listing;
+                $statusCode=200;
+                $message="List is Present"; 
+                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
+              
+          }
           
-          
-          
-          
-          
-          
-          
-          
-          
+       
           
           
             }
@@ -326,6 +333,61 @@ class Branch extends MX_Controller
     
 
 
+    
+            
+    
+    //********************************** Upadate Leave ********************************************//  
+    //********************************** Upadate Leave ********************************************//  
+
+            
+    
+    
+    
+        
+           
+//********************************** all select list  ********************************************//     
+//********************************** all select list  ********************************************//     
+//********************************** all select list  ********************************************//  
+    
+      public function allselectlist()
+            {
+          
+          $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['opEmailId'];
+                $moduleName = $jsonArray['moduleName'];
+          
+         
+          
+          		    $where=array('emailaddress'=>$username);
+					$listing=$this->Mydb->get_record('companyid', 'create_employee',$where);
+					$data['companyid']= $listing;
+					$companyid=implode($listing);
+          
+                    $where=array('companyid'=>$companyid);
+          
+                            $department=$this->Mydb->get_all_records('id,companyid,department,date,del_status', 'department', $where);
+                            $role=$this->Mydb->get_all_records('id,companyid,role,date,del_status', 'role', $where);
+                            $designation=$this->Mydb->get_all_records('id,companyid,designation,date,del_status', 'designation', $where);
+                            $branch=$this->Mydb->get_all_records('id,companyid,branch,date,del_status', 'branchlist', $where);
+
+          
+                            $statusCode=200;
+                            $message="List is Present";
+                            echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'department' => $department, 'role'=>$role, 'designation'=>$designation, 'designation' => $designation));
+
+
+
+                $this->load->view('projectlist/projectlist',$data);
+            }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
             
     
