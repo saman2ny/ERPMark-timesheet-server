@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2021 at 10:27 PM
+-- Generation Time: May 31, 2021 at 10:54 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -255,6 +255,7 @@ CREATE TABLE `create_employee` (
   `employeenumber` varchar(255) NOT NULL,
   `joiningdate` date NOT NULL,
   `designation` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
   `gender` varchar(255) NOT NULL,
   `birthday` date NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -277,13 +278,13 @@ CREATE TABLE `create_employee` (
 -- Dumping data for table `create_employee`
 --
 
-INSERT INTO `create_employee` (`id`, `companyid`, `companyname`, `employeeid`, `role`, `selectbranch`, `firstname`, `lastname`, `employeenumber`, `joiningdate`, `designation`, `gender`, `birthday`, `address`, `mobilenumber`, `emailaddress`, `password`, `panno`, `aadharno`, `bankname`, `ifsc`, `accountnumber`, `visaexpirydate`, `teamname`, `teamid`, `country`, `del_status`) VALUES
-(33, '001', 'DK', 'EMP10018', 'employee', 'Erode', 'Ragu', 'R', '00000123', '2019-11-14', 'services', 'Male', '2019-11-13', '#124/6  anna nagar chennai', '987645313265', 'ragu@gmail.com', 'ragu', 'IUHKJB643538', '9685231475896', 'IOB', 'IOB0000212', '10100065423001', '2019-11-17', 'darkknight', '1', '', 0),
-(34, '001', 'ERPMark', 'EMP10019', 'employee', 'Chennai', 'Deepan', 'A', '60003190010', '2020-01-02', 'Area Head', 'Male', '1977-08-23', 'No.7 Sakthi vinayagar koil street', '9445149490', 'deepan.a@thinkwise.pro', 'deepan2020', 'ARYPD0015D', '509463008888', 'BOI', 'BKID0008013', '801310110012763', '', 'darkknight', '', '', 0),
-(37, '001', '', 'EMP10021', 'employee', 'Chennai', 'Yogendiran', '', '1001001', '2019-02-20', 'BDM', 'Male', '1997-02-07', 'ECRaaaaaaaaaaaaaa', '7010743603', 'yogendiran.s@thinkwise.pro', 'yogi1@3', 'WEFD25SDF1', '21654946698464', 'IOB', 'FGDF245DFD', '884531356456', '', 'darkknighta', '5', '', 0),
-(38, '002', '', 'EMP10022', 'employee', 'Chennai', 'Rishikesh', 'H', '1001002', '2018-02-22', 'BDM', 'Male', '1997-07-02', 'Porur', '7904081156', 'rishikesh@thinkwise.pro', 'rishi1@3', 'lknjkjljoljpo', 'jjpjpjpojp', 'IOB', 'jpoijp', 'pojpjpo', '', 'darkknight', '', '', 0),
-(39, '002', '', 'EMP10023', 'employee', 'Chennai', 'Saravanan', 'S', '1001003', '2019-06-03', 'BDM', 'Male', '1996-09-02', 'Triplicane', '9677857427', 'saravanan@thinkwise.pro', 'sara1@3', 'klnjklj', 'pjoj0', 'mjlmp', 'l;m', 'ipop', '', 'darkknight', '', '', 0),
-(40, '001', 'ERPMark', 'EMP10024', 'HR', 'Chennai', 'tom', 'a', '65', '2021-05-02', 'HR', 'Male', '2021-05-02', 'chennai', '9876543210', 'logu@gmail.com', 'qwerty', '', '', '', '', '', '', 'darkknight', '', '', 0);
+INSERT INTO `create_employee` (`id`, `companyid`, `companyname`, `employeeid`, `role`, `selectbranch`, `firstname`, `lastname`, `employeenumber`, `joiningdate`, `designation`, `department`, `gender`, `birthday`, `address`, `mobilenumber`, `emailaddress`, `password`, `panno`, `aadharno`, `bankname`, `ifsc`, `accountnumber`, `visaexpirydate`, `teamname`, `teamid`, `country`, `del_status`) VALUES
+(33, '001', 'DK', 'EMP10018', 'employee', 'Erode', 'Ragu', 'R', '00000123', '2019-11-14', 'services', '', 'Male', '2019-11-13', '#124/6  anna nagar chennai', '987645313265', 'ragu@gmail.com', 'ragu', 'IUHKJB643538', '9685231475896', 'IOB', 'IOB0000212', '10100065423001', '2019-11-17', 'darkknight', '1', '', 0),
+(34, '001', 'ERPMark', 'EMP10019', 'Employee', 'Chennai', 'Deepan', 'A', '60003190010', '2020-01-02', 'Area Head', '', 'Male', '1977-08-23', 'No.7 Sakthi vinayagar koil street', '9445149490', 'deepan.a@thinkwise.pro', 'deepan2020', 'ARYPD0015D', '509463008888', 'BOI', 'BKID0008013', '801310110012763', '', 'darkknight', '', '', 0),
+(37, '001', '', 'EMP10021', 'employee', 'Chennai', 'Yogendiran', '', '1001001', '2019-02-20', 'BDM', '', 'Male', '1997-02-07', 'ECRaaaaaaaaaaaaaa', '7010743603', 'yogendiran.s@thinkwise.pro', 'yogi1@3', 'WEFD25SDF1', '21654946698464', 'IOB', 'FGDF245DFD', '884531356456', '', 'darkknighta', '5', '', 0),
+(38, '002', '', 'EMP10022', 'employee', 'Chennai', 'Rishikesh', 'H', '1001002', '2018-02-22', 'BDM', '', 'Male', '1997-07-02', 'Porur', '7904081156', 'rishikesh@thinkwise.pro', 'rishi1@3', 'lknjkjljoljpo', 'jjpjpjpojp', 'IOB', 'jpoijp', 'pojpjpo', '', 'darkknight', '', '', 0),
+(39, '002', '', 'EMP10023', 'employee', 'Chennai', 'Saravanan', 'S', '1001003', '2019-06-03', 'BDM', '', 'Male', '1996-09-02', 'Triplicane', '9677857427', 'saravanan@thinkwise.pro', 'sara1@3', 'klnjklj', 'pjoj0', 'mjlmp', 'l;m', 'ipop', '', 'darkknight', '', '', 0),
+(40, '001', 'ERPMark', 'EMP10024', 'HR', 'Chennai', 'tom', 'a', '65', '2021-05-02', 'HR', '', 'Male', '2021-05-02', 'chennai', '9876543210', 'logu@gmail.com', 'qwerty', '', '', '', '', '', '', 'darkknight', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -326,16 +327,16 @@ CREATE TABLE `designation_menu` (
 --
 
 INSERT INTO `designation_menu` (`id`, `label_name`, `route_path`, `designation`, `icons`, `menu_list`, `del_status`) VALUES
-(1, 'Employee', '/home/employee/list-employee', 'Branch', 'la la-users', '0', 0),
-(2, 'Attendance', '/home/attendance/list-attendance', 'Branch', 'la la-users', '0', 0),
-(3, 'Team_Allocation', '/home/allocate-team/list-team', 'Branch', 'la la-users', '0', 0),
-(4, 'Generate_Sprints', '/home/allocate-sprint/list-sprint', 'Branch', 'la la-users', '0', 0),
-(5, 'Leave', '/home/allocate-leave/list-leave', 'Branch', 'la la-users', '0', 0),
-(6, 'Timesheet', '/home/timesheet/list-timesheet', 'Branch', 'la la-users', '0', 0),
-(7, 'Resigination', '/home/resigination/resigination-list', 'Branch', 'la la-users', '0', 0),
-(8, 'Project_allocation', '/home/allocate-task/list-task', 'Branch', 'la la-users', '0', 0),
-(9, 'Settings', '/home/settings/', 'Branch', 'la la-users', '0', 0),
-(10, 'Reports', '/home/reports/', 'Branch', 'la la-users', '0', 0),
+(1, 'Employee', '/home/employee/list-employee', 'Employee', 'la la-users', '0', 0),
+(2, 'Attendance', '/home/attendance/list-attendance', 'Employee', 'la la-users', '0', 0),
+(3, 'Team_Allocation', '/home/allocate-team/list-team', 'Employee', 'la la-users', '0', 0),
+(4, 'Generate_Sprints', '/home/allocate-sprint/list-sprint', 'Employee', 'la la-users', '0', 0),
+(5, 'Leave', '/home/allocate-leave/list-leave', 'Employee', 'la la-users', '0', 0),
+(6, 'Timesheet', '/home/timesheet/list-timesheet', 'Employee', 'la la-users', '0', 0),
+(7, 'Resigination', '/home/resigination/resigination-list', 'Employee', 'la la-users', '0', 0),
+(8, 'Project_allocation', '/home/allocate-task/list-task', 'Employee', 'la la-users', '0', 0),
+(9, 'Settings', '/home/settings/', 'Employee', 'la la-users', '0', 0),
+(10, 'Reports', '/home/reports/', 'Employee', 'la la-users', '0', 0),
 (11, 'Employee', '/home/employee/list-employee', 'HR', 'la la-users', '0', 0),
 (12, 'Leave', '/home/allocate-leave/list-leave', 'HR', 'la la-users', '0', 0),
 (13, 'Attendance', '/home/attendance/list-attendance', 'HR', 'la la-users', '0', 0),

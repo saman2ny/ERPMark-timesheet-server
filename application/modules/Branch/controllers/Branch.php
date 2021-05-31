@@ -53,7 +53,7 @@ class Branch extends MX_Controller
 				// echo $email;
             
             
-            $logi = 'HR';
+       
                 
                 $datas = array(
                     'emailaddress' => $username,
