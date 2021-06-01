@@ -256,11 +256,14 @@ class Branch extends MX_Controller
           if($moduleName === "employeer")
           {
                 $listing=$this->Mydb->get_all_records('id,role,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
-
+//id Auto Increment
+        $autoempid['maxCEId']=$this->Mydb->getCEid();  //emp
+//        $data['maxMTId']=$this->Mydb->getMTid();   // team
+		
                 $data['employee']= $listing;
                 $statusCode=200;
                 $message="List is Present"; 
-                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
+                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing, 'empid'=> $autoempid));
               
           }
           
@@ -369,13 +372,12 @@ class Branch extends MX_Controller
                             $role=$this->Mydb->get_all_records('id,companyid,roleId,role,date,del_status', 'role', $where);
                             $designation=$this->Mydb->get_all_records('id,companyid,designationId,designation,date,del_status', 'designation', $where);
                             $branch=$this->Mydb->get_all_records('id,companyid,branchId,branch,date,del_status', 'branchlist', $where);
+                            $team=$this->Mydb->get_all_records('id,companyid,teamId,teamname,date,del_status', 'teamlist', $where);
 
           
                             $statusCode=200;
                             $message="List is Present";
-                            echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'department' => $department, 'role'=>$role, 'designation'=>$designation, 'branch' => $branch));
-
-
+    echo json_encode(array( 'status' => $statusCode, 'message' => $message, 'department' => $department, 'role'=>$role, 'designation' => $designation, 'branch' => $branch, 'team' => $team));
 
             }
     
@@ -1148,10 +1150,10 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
 			$this->load->model("Mydb");
 			$this->Mydb->checkLoginBranch();
 		
-        //id Auto Increment
-        $data['maxCEId']=$this->Mydb->getCEid();  //emp
-        $data['maxMTId']=$this->Mydb->getMTid();   // team
-		
+//        //id Auto Increment
+//        $data['maxCEId']=$this->Mydb->getCEid();  //emp
+//        $data['maxMTId']=$this->Mydb->getMTid();   // team
+//		
         $data = array();
              if($this->input->server('REQUEST_METHOD') == "POST")
         {
