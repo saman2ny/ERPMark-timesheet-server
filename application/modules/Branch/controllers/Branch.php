@@ -1196,7 +1196,7 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
     {
         
              $jsonArray = json_decode(file_get_contents('php://input'),true); 
-				$username = $jsonArray['opEmailId'];
+				$username = $jsonArray['EmailId'];
                 $moduleName = $jsonArray['moduleName'];
         
         
