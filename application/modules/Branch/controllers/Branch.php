@@ -1177,18 +1177,18 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
         
             $checkemail = $this->Mydb->email_check($key);
         
-                if($checkemail == true)
+                if($checkemail == false)
                 {
                     $statusCode=200;
                     $message="succ"; 
-					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
 					exit;                    
                 } 
       else
                 {
                     $statusCode=400;
                     $message="email already exists"; 
-					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
 					exit;                    
                 }
                
