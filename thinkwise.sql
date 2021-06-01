@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2021 at 08:45 PM
+-- Generation Time: Jun 08, 2021 at 11:16 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -1654,7 +1654,7 @@ INSERT INTO `resigination` (`id`, `employeeid`, `empname`, `department`, `design
 
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
-  `roleId` varchar(255) NOT NULL,
+  `roleid` varchar(255) NOT NULL,
   `companyid` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
   `date` date NOT NULL,
@@ -1665,7 +1665,7 @@ CREATE TABLE `role` (
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`id`, `roleId`, `companyid`, `role`, `date`, `del_status`) VALUES
+INSERT INTO `role` (`id`, `roleid`, `companyid`, `role`, `date`, `del_status`) VALUES
 (1, 'ROL1001', '001', 'employee', '2021-06-01', 0);
 
 -- --------------------------------------------------------
