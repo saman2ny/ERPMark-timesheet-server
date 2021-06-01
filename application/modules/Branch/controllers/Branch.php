@@ -373,11 +373,10 @@ class Branch extends MX_Controller
           
                             $statusCode=200;
                             $message="List is Present";
-                            echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'department' => $department, 'role'=>$role, 'designation'=>$designation, 'designation' => $designation));
+                            echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'department' => $department, 'role'=>$role, 'designation'=>$designation, 'branch' => $branch));
 
 
 
-                $this->load->view('projectlist/projectlist',$data);
             }
     
     
