@@ -49,64 +49,82 @@ class Branch extends MX_Controller
                 // $username = json_encode($email); 
                 // $password = json_encode($password);
 				
-				// echo $username;
-				// echo $email;
+			
+				
+    
+        $ch= "";
+       $decrptPass = '';
+   $EN_FROM_KEYS = "{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5',
+'6', '7', '8', '9', '=', '#', '$', '-', '+', '_', '.', '@', '&', '!' }";
+  
+  $EN_TO_KEYS = "{ 'p', 'q', 'r', 's', 't', 'k', 'l', 'm', 'n', 'o', 'a', 'b', 'c', 'd', 'e', 'u', 'v',
+'w', 'x', 'y', 'z', 'f', 'g', 'h', 'i', 'j', 'H', 'I', 'J', 'K', 'L', 'M', 'X', 'Y', 'Z', 'E', 'F', 'G',
+'N', 'O', 'P', 'Q', 'R', 'A', 'B', 'C', 'D', 'S', 'T', 'U', 'V', 'W', '9', '6', '1', '7', '8', '2', '0',
+'4', '5', '=', '3', '.', '!', '-', '@', '_', '$', '#', '+', '&' }";
+
+
+try {
+$password = substr($password, 5,  strlen($password) - 10);
+
+for ($i = 0; $i < strlen($password); $i++) {
+ $ch = $password[$i];
+
+for ($j = 0; $j < strlen($EN_TO_KEYS); $j++) {
+if ($ch == $EN_TO_KEYS[$j]) {
+$ch = $EN_FROM_KEYS[$j];
+break;
+}
+}
+
+ $decrptPass .= $ch;
+
+}
+} catch (Exception $e) {
+$decrptPass = "";
+}
+// echo $decrptPass;
+
+
             
-            
-       
-                
+   
+
                 $datas = array(
                     'emailaddress' => $username,
-                    'password' => $password
+                    'password' => $decrptPass
                 );
                 
                  $logins=$this->Mydb->get_all_records('firstname,role,emailaddress,password,employeeid,companyid,companyname', 'create_employee', $datas);
 
             
             
+              
+                if($logins)
+                {
+					
+					
                     $listing=$this->Mydb->get_record('role', 'create_employee', $datas);
                     $data['role']= $listing;
                     $roleno=implode($listing);
                     $designation=array('designation'=>$roleno);
             
-                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $designation);
-//                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $logins[0]['designation']);
-            
+                 $menulist=$this->Mydb->get_all_records('label_name,route_path,designation,menu_list,icons', 'designation_menu', $designation);           
             
                 
                 $data['employee']= $logins;
-              
-                if($logins)
-                {
+				
                     $data = array(
                         $username => $data['emailaddress'],
                         $password => $data['password'],
                         'isset_login' => TRUE
 
                     );
-//                    $this->session->set_userdata($data);
                     $statusCode = 200;
                     $message="You have logged in successfully";
-                    
-					             
-                    
-                    
-                    
-//                    $object = json_encode($logins);
-                   
-                 
-                    
-
                         
                        $logins['sessionValidMinutes'] = '15';
-//                        $datas['firstname'] = $logins['firstname'];
 					print_r  (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message, 'menu'=> $menulist)));
-                    
-//                    print_r($object);
-                    
-//                    echo $object;
-                    
-                    
 					exit;
 					
                 }
@@ -117,16 +135,7 @@ class Branch extends MX_Controller
 					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
 					exit;					
                 }
-            // }
-            // else
-            // {
-                
-                // $status =  "validation_error";
-                // $content =  validation_errors();
-            // }
-            // echo json_encode(array( 'status' =>  $status, 'content' => $content));
-            // exit;
-        // }
+
            
     }
     
