@@ -250,7 +250,7 @@ $decrptPass = "";
       public function employeerList()
             {
                 $jsonArray = json_decode(file_get_contents('php://input'),true); 
-				$username = $jsonArray['opEmailId'];
+				$username = $jsonArray['EmailId'];
                 $moduleName = $jsonArray['moduleName'];
 
                     $where=array('emailaddress'=>$username);
@@ -262,7 +262,7 @@ $decrptPass = "";
                     $where=array('companyid'=>$companyid,  'role'=>$role);
                     $wheretime=array('companyid'=>$companyid);
                     
-          if($moduleName === "employeer")
+          if($moduleName === "employee")
           {
                 $listing=$this->Mydb->get_all_records('id,role,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
 //id Auto Increment
@@ -365,7 +365,7 @@ $decrptPass = "";
             {
           
           $jsonArray = json_decode(file_get_contents('php://input'),true); 
-				$username = $jsonArray['opEmailId'];
+				$username = $jsonArray['EmailId'];
                 $moduleName = $jsonArray['moduleName'];
           
          
@@ -1210,7 +1210,6 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
         
         
 			$this->load->model("Mydb");
-			$this->Mydb->checkLoginBranch();
         
 				$companyid = $jsonArray['opCompanyId'];
 				$employeeid = $jsonArray['opEmployeeId'];
@@ -1267,7 +1266,7 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                             'visaexpirydate'=>$passport,
                             'teamname'=>$teamname,
                             'department'=>$empdepart,
-                            'emping'=>$empimg
+                            'empimg'=>$empimg
                           );
                 
         
@@ -1279,22 +1278,20 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                 if($insert)
                 {
            
-                    $status="ok";
-                     $this->session->set_flashdata('msg', 'Form submitted successfully');
-//                    $content = base_url()."Branch/i nsertemployee/";
+				$statusCode=200;
+				$message="Inserted  Successfully";
+				echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
+				exit;
                 }
          
             else
             {
-                $status =  "validation_error";
-                $content =  validation_errors();
+               	$statusCode=400;
+				$message="Failed  to insert";
+				echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
+				exit;
             }
-                            $statusCode=200;
-                            $message="List is Present";
-        
-            echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
-            exit;
-        
+             
    
         
         
