@@ -65,6 +65,7 @@ class Branch extends MX_Controller
 '4', '5', '=', '3', '.', '!', '-', '@', '_', '$', '#', '+', '&' }";
 
 
+
 try {
 $password = substr($password, 5,  strlen($password) - 10);
 
