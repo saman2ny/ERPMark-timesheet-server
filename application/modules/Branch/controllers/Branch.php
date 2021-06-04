@@ -265,7 +265,7 @@ $decrptPass = "";
                     
           if($moduleName === "employee")
           {
-                $listing=$this->Mydb->get_all_records('id,role,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
+                $listing=$this->Mydb->get_all_records('id,empimg,role,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
 //id Auto Increment
         $autoempid['maxCEId']=$this->Mydb->getCEid();  //emp
 //        $data['maxMTId']=$this->Mydb->getMTid();   // team
@@ -1234,7 +1234,7 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
 				$ifsc = $jsonArray['opIFSC'];
 				$accno = $jsonArray['opAcctNo'];
 				$passport = $jsonArray['opPassport'];
-				$teamname = $jsonArray['opTeamName'];
+				$teamname = implode(" ",$jsonArray['opTeamName']);
 				$empdepart = $jsonArray['opEmpDepart'];
         
         
@@ -1244,30 +1244,30 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
         
         
                 $data = array( 
-                            'companyid' => $companyid,
-                            'employeeid' => $employeeid,
-                            'selectbranch' => $selectbranch,  
-                            'firstname'=>$firstname,
-                            'lastname'=>$lastname,
-                            'role'=>$role,
-                            'joiningdate'=>$dateofjoin,
-                            'designation'=>$empdesg,
-                            'gender'=>$gender,
-                            'birthday'=>$dob,
-                            'address'=>$address,
-                            'country'=>$country,
-                            'mobilenumber'=>$phoneno,
-                            'emailaddress'=>$emailid,
-                            'password'=>$confpassword,
-                            'panno'=>$panno,
-                            'aadharno'=>$aadharno,
-                            'bankname'=>$bankname,
-                            'ifsc'=>$ifsc,
-                            'accountnumber'=>$accno,
-                            'visaexpirydate'=>$passport,
-                            'teamname'=>$teamname,
-                            'department'=>$empdepart,
-                            'empimg'=>$empimg
+                            'companyid' => (!empty($companyid)) ? $companyid : NULL,
+                            'employeeid' => (!empty($employeeid)) ? $employeeid : NULL,
+                            'selectbranch' => (!empty($selectbranch)) ? $selectbranch : NULL,  
+                            'firstname'=>(!empty($firstname)) ? $firstname : NULL,
+                            'lastname'=>(!empty($lastname)) ? $lastname : NULL,
+                            'role'=>(!empty($role)) ? $role : NULL,
+                            'joiningdate'=>(!empty($dateofjoin)) ? $dateofjoin : NULL,
+                            'designation'=>(!empty($empdesg)) ? $empdesg : NULL,
+                            'gender'=>(!empty($gender)) ? $gender : NULL,
+                            'birthday'=>(!empty($dob)) ? $dob : NULL,
+                            'address'=>(!empty($address)) ? $address : NULL,
+                            'country'=>(!empty($country)) ? $country : NULL,
+                            'mobilenumber'=>(!empty($phoneno)) ? $phoneno : NULL,
+                            'emailaddress'=>(!empty($emailid)) ? $emailid : NULL,
+                            'password'=>(!empty($confpassword)) ? $confpassword : NULL,
+                            'panno'=>(!empty($panno)) ? $panno : NULL,
+                            'aadharno'=>(!empty($aadharno)) ? $aadharno : NULL,
+                            'bankname'=>(!empty($bankname)) ? $bankname : NULL,
+                            'ifsc'=>(!empty($ifsc)) ? $ifsc : NULL,
+                            'accountnumber'=>(!empty($accno)) ? $accno : NULL,
+                            'visaexpirydate'=>(!empty($passport)) ? $passport : NULL,
+                            'teamname'=>(!empty($teamname)) ? $teamname : NULL,
+                            'department'=>(!empty($empdepart)) ? $empdepart : NULL,
+                            'empimg'=>(!empty($empimg)) ? $empimg : NULL
                           );
                 
         
