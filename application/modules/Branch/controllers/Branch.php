@@ -96,7 +96,7 @@ $decrptPass = "";
                     'password' => $decrptPass
                 );
                 
-                 $logins=$this->Mydb->get_all_records('firstname,role,emailaddress,password,employeeid,companyid,companyname', 'create_employee', $datas);
+                 $logins=$this->Mydb->get_all_records('firstname,role,department,designation,emailaddress,password,employeeid,companyid,companyname', 'create_employee', $datas);
 
             
             
@@ -125,7 +125,7 @@ $decrptPass = "";
                     $message="You have logged in successfully";
                         
                        $logins['sessionValidMinutes'] = '15';
-					print_r  (json_encode(array( 'code' =>  $statusCode,'data'=>$logins, 'message' => $message, 'menu'=> $menulist)));
+					print_r  (json_encode(array( 'status' =>  $statusCode,'data'=>$logins, 'message' => $message, 'menu'=> $menulist)));
 					exit;
 					
                 }
@@ -347,14 +347,6 @@ $decrptPass = "";
 
 
     
-            
-    
-    //********************************** Upadate Leave ********************************************//  
-    //********************************** Upadate Leave ********************************************//  
-
-            
-    
-    
     
         
            
@@ -384,13 +376,379 @@ $decrptPass = "";
                             $branch=$this->Mydb->get_all_records('id,companyid,branchId,branch,date,del_status', 'branchlist', $where);
                             $team=$this->Mydb->get_all_records('id,companyid,teamId,teamname,date,del_status', 'teamlist', $where);
                             $leavecat=$this->Mydb->get_all_records('id,companyid,employeeid,leavecatId,leavetype,date', 'leavecat', $where);
+                            $project=$this->Mydb->get_all_records('id,projectname,deadline,companyid,projecttype,message,teamname,tlname,date', 'project', $where);
 
           
                             $statusCode=200;
                             $message="List is Present";
-    echo json_encode(array( 'status' => $statusCode, 'message' => $message, 'department' => $department, 'role'=>$role, 'designation' => $designation, 'branch' => $branch, 'team' => $team));
+    echo json_encode(array( 'status' => $statusCode, 'message' => $message, 'department' => $department, 'role'=>$role, 'designation' => $designation, 'branch' => $branch, 'team' => $team, 'leavecat'=> $leavecat, 'projectlist' =>$project));
 
             }
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+             
+    public function insertemployee()
+    {
+        
+             $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['EmailId'];
+                $moduleName = $jsonArray['moduleName'];
+        
+        
+			$this->load->model("Mydb");
+        
+				$companyid = $jsonArray['opCompanyId'];
+				$employeeid = $jsonArray['opEmployeeId'];
+				$selectbranch = $jsonArray['opSelectBranch'];
+				$firstname = $jsonArray['opFirstName'];
+				$lastname = $jsonArray['opLastName'];
+				$role = $jsonArray['opRole'];
+				$dateofjoin = $jsonArray['opDateOfJoin'];
+				$empdesg = $jsonArray['opEmpDesg'];
+				$gender = $jsonArray['opGender'];
+				$dob = $jsonArray['opDateOfBirth'];
+				$address = $jsonArray['opAddress'];
+				$country = $jsonArray['opCountry'];
+				$phoneno = $jsonArray['opPhoneId'];
+				$emailid = $jsonArray['opEmailId'];
+				$password = $jsonArray['opPassword'];
+				$confpassword = $jsonArray['opConfirmPassword'];
+				$panno = $jsonArray['opPanNo'];
+				$aadharno = $jsonArray['opAadharNo'];
+				$bankname = $jsonArray['opBankName'];
+				$ifsc = $jsonArray['opIFSC'];
+				$accno = $jsonArray['opAcctNo'];
+				$passport = $jsonArray['opPassport'];
+				$teamname = $jsonArray['opTeamName'];
+				$empdepart = $jsonArray['opEmpDepart'];
+        
+        
+        
+				$imgdisp = $jsonArray['opEmpImgDisplay'];
+				$empimg = $jsonArray['opEmpImg'];
+        
+        
+                $data = array( 
+                            'companyid' => $companyid,
+                            'employeeid' => $employeeid,
+                            'selectbranch' => $selectbranch,  
+                            'firstname'=>$firstname,
+                            'lastname'=>$lastname,
+                            'role'=>$role,
+                            'joiningdate'=>$dateofjoin,
+                            'designation'=>$empdesg,
+                            'gender'=>$gender,
+                            'birthday'=>$dob,
+                            'address'=>$address,
+                            'country'=>$country,
+                            'mobilenumber'=>$phoneno,
+                            'emailaddress'=>$emailid,
+                            'password'=>$confpassword,
+                            'panno'=>$panno,
+                            'aadharno'=>$aadharno,
+                            'bankname'=>$bankname,
+                            'ifsc'=>$ifsc,
+                            'accountnumber'=>$accno,
+                            'visaexpirydate'=>$passport,
+                            'teamname'=>$teamname,
+                            'department'=>$empdepart,
+                            'empimg'=>$empimg
+                          );
+                
+        
+        
+        
+                
+                         
+        $insert = $this->Mydb->insert('create_employee', $data);  
+                if($insert)
+                {
+           
+				$statusCode=200;
+				$message="Inserted  Successfully";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+                }
+         
+            else
+            {
+               	$statusCode=400;
+				$message="Failed  to insert";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+            }
+             
+   
+        
+        
+    }
+    
+
+    
+    
+  //************************** insert Leave list  **********************************//
+  //************************** insert Leave list  **********************************//
+    
+    
+             
+    public function insertleave()
+    {
+        
+             $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['EmailId'];
+                $moduleName = $jsonArray['moduleName'];
+        
+        
+			$this->load->model("Mydb");
+        
+				$companyid = $jsonArray['opCompanyId'];
+				$employeeid = $jsonArray['opEmployeeId'];
+				$leavetype = $jsonArray['opleavetype'];
+				$datestart = $jsonArray['opDatestart'];
+				$dateend = $jsonArray['opDateEnd'];
+				$nodays = $jsonArray['opNodays'];
+				$reson = $jsonArray['opReason'];
+				
+        
+        
+        
+        
+        
+        
+			
+        
+        
+                $data = array( 
+                            'companyid' => $companyid,
+                            'employeeid' => $employeeid,
+                            'leavetype' => $leavetype, 
+                            'fromdate' => $datestart, 
+                            'todate' => $dateend, 
+                            'noofleave' => $nodays, 
+                            'message' => $reson
+                          );
+                
+        
+        
+        
+                
+                         
+        $insert = $this->Mydb->insert('leave', $data);  
+                if($insert)
+                {
+           
+				$statusCode=200;
+				$message="Inserted  Successfully";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+                }
+         
+            else
+            {
+               	$statusCode=400;
+				$message="Failed  to insert";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+            }
+             
+   
+        
+        
+    }
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+  //************************** insert resignation  **********************************//
+  //************************** insert resignation  **********************************//
+    
+    
+             
+    public function insertresignationss()
+    {
+        
+             $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['EmailId'];
+                $moduleName = $jsonArray['moduleName'];
+        date_default_timezone_set('asia/kolkata');
+            $date = date("Y-m-d");
+        
+			$this->load->model("Mydb");
+        
+				$companyid = $jsonArray['opCompanyId'];
+				$employeeid = $jsonArray['opEmployeeId'];
+				$firstname = $jsonArray['opFirstname'];
+				$department = $jsonArray['opDepartment'];
+				$designation = $jsonArray['opDesignation'];
+				$noticedate = $jsonArray['opNoticedate'];
+				$resignationdate = $jsonArray['opResignationdate'];
+				$reson = $jsonArray['opReason'];
+				
+        
+        
+        
+        
+
+
+
+
+        
+        
+			
+        
+        
+                $data = array( 
+                            'companyid' => $companyid,
+                            'employeeid' => $employeeid,
+                            'empname' => $firstname,
+                            'department' => $department, 
+                            'designation' => $designation, 
+                            'notice_date' => $noticedate, 
+                            'resignation_date' => $resignationdate, 
+                            'date' => $date, 
+                            'reason' => $reson
+                          );
+                
+        
+        
+        
+                
+                         
+        $insert = $this->Mydb->insert('resigination', $data);  
+                if($insert)
+                {
+           
+				$statusCode=200;
+				$message="Inserted  Successfully";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+                }
+         
+            else
+            {
+               	$statusCode=400;
+				$message="Failed  to insert";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+            }
+             
+   
+        
+        
+    }
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+  //************************** insert Timesheet  **********************************//
+  //************************** insert Timesheet  **********************************//
+    
+    
+             
+    public function inserttimesheetlist()
+    {
+        
+             $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['EmailId'];
+                $moduleName = $jsonArray['moduleName'];
+        date_default_timezone_set('asia/kolkata');
+            $date = date("Y-m-d");
+        
+			$this->load->model("Mydb");
+        
+				$companyid = $jsonArray['opCompanyId'];
+				$employeeid = $jsonArray['opEmployeeId'];
+				$firstname = $jsonArray['opFirstname'];
+				$projectname = $jsonArray['opProjectname'];
+				$projecthours = $jsonArray['opProjecthours'];
+				$description = $jsonArray['opDescription'];
+				
+  
+        
+        
+
+
+
+
+        
+        
+			
+        
+        
+                $data = array( 
+                            'companyid' => $companyid,
+                            'employeeid' => $employeeid,
+                            'empname' => $firstname,
+                            'project' => $projectname, 
+                            'hours' => $projecthours, 
+                            'description' => $description, 
+                            'date' => $date 
+                          );
+                
+        
+        
+        
+                
+                         
+        $insert = $this->Mydb->insert('timesheet', $data);  
+                if($insert)
+                {
+           
+				$statusCode=200;
+				$message="Inserted  Successfully";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+                }
+         
+            else
+            {
+               	$statusCode=400;
+				$message="Failed  to insert";
+				echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+				exit;
+            }
+             
+   
+        
+        
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1188,117 +1546,23 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                 {
                     $statusCode=200;
                     $message="succ"; 
-					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
+					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
 					exit;                    
                 }
       else
                 {
                     $statusCode=400;
                     $message="email already exists"; 
-					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
+					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
 					exit;                    
                 }
                
 }
     
-             
-    public function insertemployee()
-    {
-        
-             $jsonArray = json_decode(file_get_contents('php://input'),true); 
-				$username = $jsonArray['EmailId'];
-                $moduleName = $jsonArray['moduleName'];
-        
-        
-			$this->load->model("Mydb");
-        
-				$companyid = $jsonArray['opCompanyId'];
-				$employeeid = $jsonArray['opEmployeeId'];
-				$selectbranch = $jsonArray['opSelectBranch'];
-				$firstname = $jsonArray['opFirstName'];
-				$lastname = $jsonArray['opLastName'];
-				$role = $jsonArray['opRole'];
-				$dateofjoin = $jsonArray['opDateOfJoin'];
-				$empdesg = $jsonArray['opEmpDesg'];
-				$gender = $jsonArray['opGender'];
-				$dob = $jsonArray['opDateOfBirth'];
-				$address = $jsonArray['opAddress'];
-				$country = $jsonArray['opCountry'];
-				$phoneno = $jsonArray['opPhoneId'];
-				$emailid = $jsonArray['opEmailId'];
-				$password = $jsonArray['opPassword'];
-				$confpassword = $jsonArray['opConfirmPassword'];
-				$panno = $jsonArray['opPanNo'];
-				$aadharno = $jsonArray['opAadharNo'];
-				$bankname = $jsonArray['opBankName'];
-				$ifsc = $jsonArray['opIFSC'];
-				$accno = $jsonArray['opAcctNo'];
-				$passport = $jsonArray['opPassport'];
-				$teamname = $jsonArray['opTeamName'];
-				$empdepart = $jsonArray['opEmpDepart'];
-        
-        
-        
-				$imgdisp = $jsonArray['opEmpImgDisplay'];
-				$empimg = $jsonArray['opEmpImg'];
-        
-        
-                $data = array( 
-                            'companyid' => $companyid,
-                            'employeeid' => $employeeid,
-                            'selectbranch' => $selectbranch,  
-                            'firstname'=>$firstname,
-                            'lastname'=>$lastname,
-                            'role'=>$role,
-                            'joiningdate'=>$dateofjoin,
-                            'designation'=>$empdesg,
-                            'gender'=>$gender,
-                            'birthday'=>$dob,
-                            'address'=>$address,
-                            'country'=>$country,
-                            'mobilenumber'=>$phoneno,
-                            'emailaddress'=>$emailid,
-                            'password'=>$confpassword,
-                            'panno'=>$panno,
-                            'aadharno'=>$aadharno,
-                            'bankname'=>$bankname,
-                            'ifsc'=>$ifsc,
-                            'accountnumber'=>$accno,
-                            'visaexpirydate'=>$passport,
-                            'teamname'=>$teamname,
-                            'department'=>$empdepart,
-                            'empimg'=>$empimg
-                          );
-                
-        
-        
-        
-                
-                         
-        $insert = $this->Mydb->insert('create_employee', $data);  
-                if($insert)
-                {
-           
-				$statusCode=200;
-				$message="Inserted  Successfully";
-				echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
-				exit;
-                }
-         
-            else
-            {
-               	$statusCode=400;
-				$message="Failed  to insert";
-				echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
-				exit;
-            }
-             
-   
-        
-        
-    }
     
-
+    
+    
+    
     
     
     
