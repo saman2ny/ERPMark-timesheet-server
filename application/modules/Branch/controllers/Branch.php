@@ -265,7 +265,7 @@ $decrptPass = "";
                     
           if($moduleName === "employee")
           {
-                $listing=$this->Mydb->get_all_records('id,role,employeeid,selectbranch,firstname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
+                $listing=$this->Mydb->get_all_records('id,empimg,role,employeeid,selectbranch,firstname,lastname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
 //id Auto Increment
         $autoempid['maxCEId']=$this->Mydb->getCEid();  //emp
 //        $data['maxMTId']=$this->Mydb->getMTid();   // team
@@ -1559,6 +1559,105 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                
 }
     
+<<<<<<< HEAD
+=======
+             
+    public function insertemployee()
+    {
+        
+             $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['EmailId'];
+                $moduleName = $jsonArray['moduleName'];
+        
+        
+			$this->load->model("Mydb");
+        
+				$companyid = $jsonArray['opCompanyId'];
+				$employeeid = $jsonArray['opEmployeeId'];
+				$selectbranch = $jsonArray['opSelectBranch'];
+				$firstname = $jsonArray['opFirstName'];
+				$lastname = $jsonArray['opLastName'];
+				$role = $jsonArray['opRole'];
+				$dateofjoin = $jsonArray['opDateOfJoin'];
+				$empdesg = $jsonArray['opEmpDesg'];
+				$gender = $jsonArray['opGender'];
+				$dob = $jsonArray['opDateOfBirth'];
+				$address = $jsonArray['opAddress'];
+				$country = $jsonArray['opCountry'];
+				$phoneno = $jsonArray['opPhoneId'];
+				$emailid = $jsonArray['opEmailId'];
+				$password = $jsonArray['opPassword'];
+				$confpassword = $jsonArray['opConfirmPassword'];
+				$panno = $jsonArray['opPanNo'];
+				$aadharno = $jsonArray['opAadharNo'];
+				$bankname = $jsonArray['opBankName'];
+				$ifsc = $jsonArray['opIFSC'];
+				$accno = $jsonArray['opAcctNo'];
+				$passport = $jsonArray['opPassport'];
+				$teamname = implode(" ",$jsonArray['opTeamName']);
+				$empdepart = $jsonArray['opEmpDepart'];
+        
+        
+        
+				$imgdisp = $jsonArray['opEmpImgDisplay'];
+				$empimg = $jsonArray['opEmpImg'];
+        
+        
+                $data = array( 
+                            'companyid' => (!empty($companyid)) ? $companyid : NULL,
+                            'employeeid' => (!empty($employeeid)) ? $employeeid : NULL,
+                            'selectbranch' => (!empty($selectbranch)) ? $selectbranch : NULL,  
+                            'firstname'=>(!empty($firstname)) ? $firstname : NULL,
+                            'lastname'=>(!empty($lastname)) ? $lastname : NULL,
+                            'role'=>(!empty($role)) ? $role : NULL,
+                            'joiningdate'=>(!empty($dateofjoin)) ? $dateofjoin : NULL,
+                            'designation'=>(!empty($empdesg)) ? $empdesg : NULL,
+                            'gender'=>(!empty($gender)) ? $gender : NULL,
+                            'birthday'=>(!empty($dob)) ? $dob : NULL,
+                            'address'=>(!empty($address)) ? $address : NULL,
+                            'country'=>(!empty($country)) ? $country : NULL,
+                            'mobilenumber'=>(!empty($phoneno)) ? $phoneno : NULL,
+                            'emailaddress'=>(!empty($emailid)) ? $emailid : NULL,
+                            'password'=>(!empty($confpassword)) ? $confpassword : NULL,
+                            'panno'=>(!empty($panno)) ? $panno : NULL,
+                            'aadharno'=>(!empty($aadharno)) ? $aadharno : NULL,
+                            'bankname'=>(!empty($bankname)) ? $bankname : NULL,
+                            'ifsc'=>(!empty($ifsc)) ? $ifsc : NULL,
+                            'accountnumber'=>(!empty($accno)) ? $accno : NULL,
+                            'visaexpirydate'=>(!empty($passport)) ? $passport : NULL,
+                            'teamname'=>(!empty($teamname)) ? $teamname : NULL,
+                            'department'=>(!empty($empdepart)) ? $empdepart : NULL,
+                            'empimg'=>(!empty($empimg)) ? $empimg : NULL
+                          );
+                
+        
+        
+        
+                
+                         
+        $insert = $this->Mydb->insert('create_employee', $data);  
+                if($insert)
+                {
+           
+				$statusCode=200;
+				$message="Inserted  Successfully";
+				echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
+				exit;
+                }
+         
+            else
+            {
+               	$statusCode=400;
+				$message="Failed  to insert";
+				echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
+				exit;
+            }
+             
+   
+        
+        
+    }
+>>>>>>> 1cd08fab119f65bc38f2c2ca42cee90c74dee38b
     
     
     
