@@ -1147,6 +1147,43 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
              
     public function insertemployee()
     {
+        
+        
+				$jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['opCompanyId'];
+				$password = $jsonArray['opPassword'];
+				$employeeid = $jsonArray['opEmployeeId'];
+				$companyid = $jsonArray['opCompanyId'];
+				$role = $jsonArray['opRole'];
+				$selectbranch = $jsonArray['opSelectBranch'];
+				$firstname = $jsonArray['opFirstName'];
+				$lastname = $jsonArray['opLastName'];
+				$dateofjoin = $jsonArray['opDateOfJoin'];
+				$empdesg = $jsonArray['opEmpDesg'];
+				$gender = $jsonArray['opGender'];
+				$dob = $jsonArray['opDateOfBirth'];
+				$address = $jsonArray['opAddress'];
+				$country = $jsonArray['opCountry'];
+				$phoneno = $jsonArray['opPhoneId'];
+				$emailid = $jsonArray['opEmailId'];
+				$password = $jsonArray['opPassword'];
+				$confpassword = $jsonArray['opConfirmPassword'];
+				$panno = $jsonArray['opPanNo'];
+				$aadharno = $jsonArray['opAadharNo'];
+				$bankname = $jsonArray['opBankName'];
+				$ifsc = $jsonArray['opIFSC'];
+				$accno = $jsonArray['opAcctNo'];
+				$passport = $jsonArray['opPassport'];
+				$teamname = $jsonArray['opTeamName'];
+				$empdepart = $jsonArray['opEmpDepart'];
+				$imgdisp = $jsonArray['opEmpImgDisplay'];
+				$empimg = $jsonArray['opEmpImg'];
+        
+        
+        
+
+        
+        
 			$this->load->model("Mydb");
 			$this->Mydb->checkLoginBranch();
 		
