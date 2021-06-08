@@ -1177,19 +1177,18 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
         
             $checkemail = $this->Mydb->email_check($key);
         
-                if($checkemail == true)
+                if($checkemail == false)
                 {
                     $statusCode=200;
                     $message="succ"; 
-					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
-					exit;                    
+					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
                 } 
       else
                 {
                     $statusCode=400;
                     $message="email already exists"; 
-					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
-					exit;                    
+					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
+					
                 }
                
 }
@@ -1206,7 +1205,6 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
 			$this->load->model("Mydb");
 			$this->Mydb->checkLoginBranch();
         
-				$jsonArray = json_decode(file_get_contents('php://input'),true); 
 				$companyid = $jsonArray['opCompanyId'];
 				$employeeid = $jsonArray['opEmployeeId'];
 				$selectbranch = $jsonArray['opSelectBranch'];
@@ -1276,7 +1274,7 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
            
                     $status="ok";
                      $this->session->set_flashdata('msg', 'Form submitted successfully');
-                    $content = base_url()."Branch/i nsertemployee/";
+//                    $content = base_url()."Branch/i nsertemployee/";
                 }
          
             else
@@ -1287,7 +1285,7 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                             $statusCode=200;
                             $message="List is Present";
         
-            echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+            echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
             exit;
         
    
