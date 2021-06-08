@@ -339,6 +339,19 @@ class Mydb extends CI_Model {
     
     
     
+    function email_check($key)
+{
+    $this->db->where('emailaddress',$key);
+    $query = $this->db->get('create_employee');
+    if ($query->num_rows() > 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+    
+    
 
 
     function getMTid()

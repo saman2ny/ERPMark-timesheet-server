@@ -313,19 +313,19 @@ class Branch extends MX_Controller
           
           
                                                   
-         else if($moduleName === "resigination")
-          {
-                    
-       $listing=$this->Mydb->get_all_records('id,employeeid,empname,department,reason,notice_date,resigination_date,date', 'resigination', '');
-        $data['resigination']= $listing;
-             
-             
-                $data['resigination']= $listing;
-                $statusCode=200;
-                $message="List is Present"; 
-                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
-              
-          }
+//         else if($moduleName === "resigination")
+//          {
+//                    
+//       $listing=$this->Mydb->get_all_records('id,employeeid,empname,department,reason,notice_date,resigination_date,date', 'resigination', '');
+//        $data['resigination']= $listing;
+//             
+//             
+//                $data['resigination']= $listing;
+//                $statusCode=200;
+//                $message="List is Present"; 
+//                echo json_encode(array( 'status' =>  $statusCode, 'message' => $message, 'data' => $listing));
+//              
+//          }
           
        
           
@@ -373,6 +373,7 @@ class Branch extends MX_Controller
                             $designation=$this->Mydb->get_all_records('id,companyid,designationId,designation,date,del_status', 'designation', $where);
                             $branch=$this->Mydb->get_all_records('id,companyid,branchId,branch,date,del_status', 'branchlist', $where);
                             $team=$this->Mydb->get_all_records('id,companyid,teamId,teamname,date,del_status', 'teamlist', $where);
+                            $leavecat=$this->Mydb->get_all_records('id,companyid,employeeid,leavecatId,leavetype,date', 'leavecat', $where);
 
           
                             $statusCode=200;
@@ -1144,20 +1145,60 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
     
     
   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public function email_exists($key)
+    {
+            $checkemail = $this->Mydb->email_check($key);
+        
+                if($checkemail == false)
+                {
+                    $statusCode=400;
+                    $message="email already exists"; 
+					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+					exit;                    
+                }
+               
+}
+    
              
     public function insertemployee()
     {
         
+             $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['opEmailId'];
+                $moduleName = $jsonArray['moduleName'];
+        
+        
+			$this->load->model("Mydb");
+			$this->Mydb->checkLoginBranch();
         
 				$jsonArray = json_decode(file_get_contents('php://input'),true); 
-				$username = $jsonArray['opCompanyId'];
-				$password = $jsonArray['opPassword'];
-				$employeeid = $jsonArray['opEmployeeId'];
 				$companyid = $jsonArray['opCompanyId'];
-				$role = $jsonArray['opRole'];
+				$employeeid = $jsonArray['opEmployeeId'];
 				$selectbranch = $jsonArray['opSelectBranch'];
 				$firstname = $jsonArray['opFirstName'];
 				$lastname = $jsonArray['opLastName'];
+				$role = $jsonArray['opRole'];
 				$dateofjoin = $jsonArray['opDateOfJoin'];
 				$empdesg = $jsonArray['opEmpDesg'];
 				$gender = $jsonArray['opGender'];
@@ -1176,91 +1217,50 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
 				$passport = $jsonArray['opPassport'];
 				$teamname = $jsonArray['opTeamName'];
 				$empdepart = $jsonArray['opEmpDepart'];
+        
+        
+        
 				$imgdisp = $jsonArray['opEmpImgDisplay'];
 				$empimg = $jsonArray['opEmpImg'];
         
         
-        
-
-        
-        
-			$this->load->model("Mydb");
-			$this->Mydb->checkLoginBranch();
-		
-//        //id Auto Increment
-//        $data['maxCEId']=$this->Mydb->getCEid();  //emp
-//        $data['maxMTId']=$this->Mydb->getMTid();   // team
-//		
-        $data = array();
-             if($this->input->server('REQUEST_METHOD') == "POST")
-        {
-                $this->form_validation->set_rules('select', 'select', 'trim|required');
-                $this->form_validation->set_rules('employeeid', 'employeeid', 'trim|required');
-                
-              
-    
- if($this->form_validation->run() !== FALSE)
-            {
-                $select=$this->input->post('select');
-                $employeeid=$this->input->post('employeeid');
-                $selectbranch=$this->input->post('selectbranch');
-                $firstname =$this->input->post('firstname');
-                $lastname =$this->input->post('lastname');
-                $employeenumber =$this->input->post('employeenumber');
-                $joiningdate =$this->input->post('joiningdate');
-                $position =$this->input->post('position');
-                $gender =$this->input->post('gender');
-                $birthday =$this->input->post('birthday');
-                $address =$this->input->post('address');
-                $area =$this->input->post('area');
-                $pincode =$this->input->post('pincode');
-                $homephone =$this->input->post('homephone');
-                $mobilenumber =$this->input->post('mobilenumber');
-                $emailaddress =$this->input->post('emailaddress');
-                $password =$this->input->post('password');
-                $companynumber =$this->input->post('companynumber');
-                $companyemail =$this->input->post('companyemail');
-                $panno =$this->input->post('panno');
-                $aadharno =$this->input->post('aadharno');
-                $bankname =$this->input->post('bankname');
-                $branchname =$this->input->post('branchname');
-                $ifsc =$this->input->post('ifsc');
-                $accountnumber =$this->input->post('accountnumber');
-                $visaexpirydate =$this->input->post('visaexpirydate');
-                
-               
-                
-                
-                          $data = array( 
-                            'select' => $select,
+                $data = array( 
+                            'companyid' => $companyid,
                             'employeeid' => $employeeid,
-//                            'selectbranch' => $selectbranch,  
+                            'selectbranch' => $selectbranch,  
                             'firstname'=>$firstname,
                             'lastname'=>$lastname,
-                            'employeenumber'=>$employeenumber,
-                            'joiningdate'=>$joiningdate,
-                            'position'=>$position,
+                            'role'=>$role,
+                            'joiningdate'=>$dateofjoin,
+                            'designation'=>$empdesg,
                             'gender'=>$gender,
-                            'birthday'=>$birthday,
+                            'birthday'=>$dob,
                             'address'=>$address,
-                            'area'=>$area,
-                            'pincode'=>$pincode,
-                            'homephone'=>$homephone,
-                            'mobilenumber'=>$mobilenumber,
-                            'emailaddress'=>$emailaddress,
-                            'password'=>$password,
-                            'companynumber'=>$companynumber,
-                            'companyemail'=>$companyemail,
+                            'country'=>$country,
+                            'mobilenumber'=>$phoneno,
+                            'emailaddress'=>$emailid,
+                            'password'=>$confpassword,
                             'panno'=>$panno,
                             'aadharno'=>$aadharno,
                             'bankname'=>$bankname,
-                            'branchname'=>$branchname,
                             'ifsc'=>$ifsc,
-                            'accountnumber'=>$accountnumber,
-                            'visaexpirydate'=>$visaexpirydate,
+                            'accountnumber'=>$accno,
+                            'visaexpirydate'=>$passport,
+                            'teamname'=>$teamname,
+                            'department'=>$empdepart,
+                            'department'=>$empimg
+                    
+                    
+
+                           
                             
                           );
                 
+        
+        
+        
+                
+                         
         $insert = $this->Mydb->insert('create_employee', $data);  
                 if($insert)
                 {
@@ -1270,21 +1270,61 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                     $content = base_url()."Branch/i nsertemployee/";
                 }
          
-            }
             else
             {
                 $status =  "validation_error";
                 $content =  validation_errors();
             }
-            echo json_encode(array( 'status' =>  $status, 'content' => $content));
-            exit;
-        }
+                            $statusCode=200;
+                            $message="List is Present";
         
-           $data['title']="Create Employee";
-			$this->load->view('createemployee/createemployee',$data);
+            echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+            exit;
+        
+   
+        
+        
     }
     
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
