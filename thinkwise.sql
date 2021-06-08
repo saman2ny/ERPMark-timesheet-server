@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2021 at 11:36 PM
+-- Generation Time: Jun 08, 2021 at 11:43 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -1167,72 +1167,6 @@ CREATE TABLE `meeting` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `new`
---
-
-CREATE TABLE `new` (
-  `id` int(11) NOT NULL,
-  `branchname` varchar(255) NOT NULL,
-  `bdmname` varchar(255) NOT NULL,
-  `employeeid` varchar(255) NOT NULL,
-  `customerid` varchar(255) NOT NULL,
-  `sourceofcall` varchar(255) NOT NULL,
-  `jointcall` varchar(255) NOT NULL,
-  `customername` varchar(255) NOT NULL,
-  `customeraddress` varchar(1000) NOT NULL,
-  `customerphoneno` varchar(255) NOT NULL,
-  `boardschool` varchar(255) NOT NULL,
-  `principalname` varchar(255) NOT NULL,
-  `principalnumber` varchar(255) NOT NULL,
-  `correspondentname` varchar(255) NOT NULL,
-  `correspondentnumber` varchar(254) NOT NULL,
-  `noofstudents` varchar(255) NOT NULL,
-  `monthlyfee` varchar(255) NOT NULL,
-  `competitiondetails` varchar(255) NOT NULL,
-  `managementpresentation` varchar(255) NOT NULL,
-  `principalpresentation` varchar(255) NOT NULL,
-  `otherpresentation` varchar(255) NOT NULL,
-  `contactperson` varchar(255) NOT NULL,
-  `contactnumber` varchar(255) NOT NULL,
-  `contactdesignation` varchar(255) NOT NULL,
-  `intime` time NOT NULL,
-  `outtime` time NOT NULL,
-  `personcontacted` varchar(255) NOT NULL,
-  `persondescription` varchar(1000) NOT NULL,
-  `producttype` varchar(255) NOT NULL,
-  `callstatus` varchar(255) NOT NULL,
-  `productname` varchar(255) NOT NULL,
-  `productvalue` varchar(255) NOT NULL,
-  `prioritystatus` varchar(255) NOT NULL,
-  `nextappointmentdate` date NOT NULL,
-  `nextappointmenttime` time NOT NULL,
-  `previouscallkms` varchar(255) NOT NULL,
-  `fromplace` varchar(255) NOT NULL,
-  `toplace` varchar(255) NOT NULL,
-  `conveyancemode` varchar(255) NOT NULL,
-  `amount` varchar(255) NOT NULL,
-  `monthyear` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `created_on` date NOT NULL,
-  `lastviewdate` date NOT NULL,
-  `signupdate` date NOT NULL,
-  `callopen` date NOT NULL,
-  `callclosed` date NOT NULL,
-  `del_status` int(11) NOT NULL DEFAULT '0',
-  `count_status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `new`
---
-
-INSERT INTO `new` (`id`, `branchname`, `bdmname`, `employeeid`, `customerid`, `sourceofcall`, `jointcall`, `customername`, `customeraddress`, `customerphoneno`, `boardschool`, `principalname`, `principalnumber`, `correspondentname`, `correspondentnumber`, `noofstudents`, `monthlyfee`, `competitiondetails`, `managementpresentation`, `principalpresentation`, `otherpresentation`, `contactperson`, `contactnumber`, `contactdesignation`, `intime`, `outtime`, `personcontacted`, `persondescription`, `producttype`, `callstatus`, `productname`, `productvalue`, `prioritystatus`, `nextappointmentdate`, `nextappointmenttime`, `previouscallkms`, `fromplace`, `toplace`, `conveyancemode`, `amount`, `monthyear`, `month`, `year`, `created_on`, `lastviewdate`, `signupdate`, `callopen`, `callclosed`, `del_status`, `count_status`) VALUES
-(730, 'Chennai', 'Rishikesh', 'EMP10022', 'CLT10289', 'Cold Call', '', 'Sudharsanam vidyashram', 'Chennai - 600 077,, Viraraghavapuram, Tamil Nadu 600077', '044 2680 0979', 'Matriculation', '', '', '', '', '1400', '', 'Pal pal', 'Yes', 'Yes', 'Yes', 'Dinesh', '+919750518797', 'It staff', '10:17:00', '10:27:00', 'Dinesh (IT )', 'went to school he was not available so said to come another day', 'Thinkwise App', 'Proposal Call', '', '', 'P1', '0000-00-00', '00:00:00', '5.6', 'Pilliar koil st', 'virargapuram', 'Bike', '', 'March2020', 'February', '2020', '2020-02-14', '2020-03-07', '0000-00-00', '0000-00-00', '0000-00-00', 0, 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `products`
 --
 
@@ -1658,12 +1592,6 @@ ALTER TABLE `meeting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `new`
---
-ALTER TABLE `new`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -1828,12 +1756,6 @@ ALTER TABLE `leavecat`
 --
 ALTER TABLE `meeting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `new`
---
-ALTER TABLE `new`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=731;
 
 --
 -- AUTO_INCREMENT for table `products`
