@@ -1166,8 +1166,17 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
     
     
     
-    public function email_exists($key)
+    public function email_exists()
     {
+        $jsonArray = json_decode(file_get_contents('php://input'),true); 
+				$username = $jsonArray['opEmailId'];
+                $moduleName = $jsonArray['moduleName'];
+        
+        
+        
+       //json value 
+        $key = $jsonArray['emailid'];
+        
             $checkemail = $this->Mydb->email_check($key);
         
                 if($checkemail == false)
