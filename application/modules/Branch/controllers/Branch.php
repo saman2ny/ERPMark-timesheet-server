@@ -1169,8 +1169,6 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
     public function email_exists()
     {
         $jsonArray = json_decode(file_get_contents('php://input'),true); 
-				$username = $jsonArray['opEmailId'];
-                $moduleName = $jsonArray['moduleName'];
         
         
         
@@ -1179,7 +1177,14 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
         
             $checkemail = $this->Mydb->email_check($key);
         
-                if($checkemail == false)
+                if($checkemail == true)
+                {
+                    $statusCode=200;
+                    $message="succ"; 
+					echo json_encode(array( 'status' =>  $statusCode, 'message' => $message));
+					exit;                    
+                } 
+      else
                 {
                     $statusCode=400;
                     $message="email already exists"; 
