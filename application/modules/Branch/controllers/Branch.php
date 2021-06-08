@@ -1163,14 +1163,11 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
     
     
     
-    
-    
-    
     public function email_exists()
     {
         $jsonArray = json_decode(file_get_contents('php://input'),true); 
         
-        
+    
         
        //json value 
         $key = $jsonArray['emailid'];
@@ -1182,13 +1179,14 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                     $statusCode=200;
                     $message="succ"; 
 					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
-                } 
+					exit;                    
+                }
       else
                 {
                     $statusCode=400;
                     $message="email already exists"; 
 					echo json_encode(array( 'code' =>  $statusCode, 'message' => $message));
-					
+					exit;                    
                 }
                
 }
