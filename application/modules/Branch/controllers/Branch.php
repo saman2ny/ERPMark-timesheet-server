@@ -1249,11 +1249,6 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                             'teamname'=>$teamname,
                             'department'=>$empdepart,
                             'department'=>$empimg
-                    
-                    
-
-                           
-                            
                           );
                 
         
