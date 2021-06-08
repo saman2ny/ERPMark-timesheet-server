@@ -1248,7 +1248,7 @@ $content=array('employeeid'=>$employeeid,'empname'=>$empname,'department'=>$depa
                             'visaexpirydate'=>$passport,
                             'teamname'=>$teamname,
                             'department'=>$empdepart,
-                            'department'=>$empimg
+                            'emping'=>$empimg
                           );
                 
         
