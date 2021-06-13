@@ -265,7 +265,7 @@ $decrptPass = "";
                     
           if($moduleName === "employee")
           {
-                $listing=$this->Mydb->get_all_records('id,empimg,role,employeeid,selectbranch,firstname,lastname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
+                $listing=$this->Mydb->get_all_records('id,companyid,department,empimg,role,employeeid,selectbranch,firstname,lastname,teamname,employeenumber,joiningdate,designation,gender,birthday,address,mobilenumber,emailaddress,password,panno,aadharno,bankname,ifsc,accountnumber,visaexpirydate', 'create_employee', $where);
 //id Auto Increment
         $autoempid['maxCEId']=$this->Mydb->getCEid();  //emp
 //        $data['maxMTId']=$this->Mydb->getMTid();   // team
